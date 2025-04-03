@@ -10,16 +10,16 @@ import java.util.Date;
  */
 public class Cuenta {
     private int id_cuenta;
-    private Orden orden; //Relacion con orden
-    private Cliente cliente; //Relacion con cliente
+    private int idOrden; //Relacion con orden
+    private int idCliente; //Relacion con cliente
     private Date fecha_cuenta;
     private float total_cuenta;
     private String estado_cuenta;
 
-    public Cuenta(int id_cuenta, Orden orden, Cliente cliente, Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
+    public Cuenta(int id_cuenta, int idOrden, int idCliente, Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
         this.id_cuenta = id_cuenta;
-        this.orden = orden;
-        this.cliente = cliente;
+        this.idOrden = idOrden;
+        this.idCliente = idCliente;
         this.fecha_cuenta = fecha_cuenta;
         this.total_cuenta = total_cuenta;
         this.estado_cuenta = estado_cuenta;
@@ -36,20 +36,20 @@ public class Cuenta {
         this.id_cuenta = id_cuenta;
     }
 
-    public Orden getOrden() {
-        return orden;
+    public int getIdOrden() {
+        return idOrden;
     }
 
-    public void setOrden(Orden orden) {
-        this.orden = orden;
+    public void setIdOrden(int idOrden) {
+        this.idOrden = idOrden;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public Date getFecha_cuenta() {
@@ -75,7 +75,5 @@ public class Cuenta {
     public void setEstado_cuenta(String estado_cuenta) {
         this.estado_cuenta = estado_cuenta;
     }
-    
-    
-    
+
 }

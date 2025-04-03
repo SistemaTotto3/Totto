@@ -11,13 +11,13 @@ import java.util.Date;
  */
 public class Orden {
     private int id_orden;
-    private Cuenta cuenta; //Relacion con cuenta
+    private int idCuenta; //Relacion con cuenta
     private Date fecha_orden;
     private List<Detalle_Orden> detalle;
 
-    public Orden(int id_orden, Cuenta cuenta, Date fecha_orden, List<Detalle_Orden> detalle) {
+    public Orden(int id_orden, int idCuenta, Date fecha_orden, List<Detalle_Orden> detalle) {
         this.id_orden = id_orden;
-        this.cuenta = cuenta;
+        this.idCuenta = idCuenta;
         this.fecha_orden = fecha_orden;
         this.detalle = detalle;
     }
@@ -33,12 +33,12 @@ public class Orden {
         this.id_orden = id_orden;
     }
 
-    public Cuenta getCuenta() {
-        return cuenta;
+    public int getIdCuenta() {
+        return idCuenta;
     }
 
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
     }
 
     public Date getFecha_orden() {
@@ -56,7 +56,5 @@ public class Orden {
     public void setDetalle(List<Detalle_Orden> detalle) {
         this.detalle = detalle;
     }
-    
-    
-    
+   
 }

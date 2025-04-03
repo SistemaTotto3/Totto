@@ -10,14 +10,14 @@ package Modelo;
  */
 public class Detalle_Insumo {
     private int id_detalle_insumo;
-    private  Insumo insumo; //Relacion con Insumo
-    private Producto producto; //Relacion con producto
+    private int idInsumo ; //Relacion con Insumo
+    private int idProducto ; //Relacion con producto
     private double cantidad_insumo;
 
-    public Detalle_Insumo(int id_detalle_insumo, Insumo insumo, Producto producto, double cantidad_insumo) {
+    public Detalle_Insumo(int id_detalle_insumo, int idInsumo, int idProducto, double cantidad_insumo) {
         this.id_detalle_insumo = id_detalle_insumo;
-        this.insumo = insumo;
-        this.producto = producto;
+        this.idInsumo = idInsumo;
+        this.idProducto = idProducto;
         this.cantidad_insumo = cantidad_insumo;
     }
 
@@ -32,20 +32,20 @@ public class Detalle_Insumo {
         this.id_detalle_insumo = id_detalle_insumo;
     }
 
-    public Insumo getInsumo() {
-        return insumo;
+    public int getIdInsumo() {
+        return idInsumo;
     }
 
-    public void setInsumo(Insumo insumo) {
-        this.insumo = insumo;
+    public void setIdInsumo(int idInsumo) {
+        this.idInsumo = idInsumo;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public double getCantidad_insumo() {
@@ -55,7 +55,5 @@ public class Detalle_Insumo {
     public void setCantidad_insumo(double cantidad_insumo) {
         this.cantidad_insumo = cantidad_insumo;
     }
-    
-    
-    
+
 }
