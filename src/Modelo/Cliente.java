@@ -9,11 +9,12 @@ package Modelo;
  * @author yuri guevara
  */
 public class Cliente {
+
     private int id_cliente;
     private String nombre_1;
     private String apellido_1;
     private String dirrecion_cliente;
-    private String telefono_cliente;   
+    private String telefono_cliente;
 
     public Cliente(int id_cliente, String nombre_1, String apellido_1, String dirrecion_cliente, String telefono_cliente) {
         this.id_cliente = id_cliente;
@@ -65,5 +66,5 @@ public class Cliente {
     public void setTelefono_cliente(String telefono_cliente) {
         this.telefono_cliente = telefono_cliente;
     }
-    
+
 }

@@ -9,9 +9,10 @@ package Modelo;
  * @author yuri guevara
  */
 public class Detalle_Insumo {
+
     private int id_detalle_insumo;
-    private int idInsumo ; //Relacion con Insumo
-    private int idProducto ; //Relacion con producto
+    private int idInsumo; //Relacion con Insumo
+    private int idProducto; //Relacion con producto
     private double cantidad_insumo;
 
     public Detalle_Insumo(int id_detalle_insumo, int idInsumo, int idProducto, double cantidad_insumo) {

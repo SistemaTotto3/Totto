@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+
 import java.util.List;
+
 /**
  *
  * @author yuri guevara
  */
 public class Insumo {
+
     private int id_insumo;
     private String nombre_insumo;
     private float precio_insumo;
@@ -55,8 +58,5 @@ public class Insumo {
     public void setDetalles(List<Detalle_Insumo> detalles) {
         this.detalles = detalles;
     }
-    
-    
-    
-    
+
 }

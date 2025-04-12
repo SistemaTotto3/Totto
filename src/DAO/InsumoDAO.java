@@ -4,10 +4,13 @@
  */
 package DAO;
 
+
+
 /**
  *
  * @author COMPHP
  */
 public class InsumoDAO {
+
     
 }

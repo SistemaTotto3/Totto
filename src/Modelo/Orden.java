@@ -3,13 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+
 import java.util.List;
 import java.util.Date;
+
 /**
  *
  * @author yuri guevara
  */
 public class Orden {
+
     private int id_orden;
     private int idCuenta; //Relacion con cuenta
     private Date fecha_orden;
@@ -56,5 +59,5 @@ public class Orden {
     public void setDetalle(List<Detalle_Orden> detalle) {
         this.detalle = detalle;
     }
-   
+
 }

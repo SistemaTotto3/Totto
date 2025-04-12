@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+
 import java.util.Date;
+
 /**
  *
  * @author yuri guevara
  */
 public class Cuenta {
+
     private int id_cuenta;
     private int idOrden; //Relacion con orden
     private int idCliente; //Relacion con cliente

@@ -3,47 +3,109 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
+
 import Modelo.Cliente;
 import Util.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
+
 /**
  *
  * @author COMPHP
  */
 public class ClienteDAO {
+
     public void crearCliente(Cliente cliente) throws SQLException {
-    String sql = """
-        INSERT INTO Clientes (
+        String sql = """
+        INSERT INTO Cliente (
             nombre_1, 
             apellido_1, 
             direccion_cliente, 
             telefono_cliente
         ) VALUES (?, ?, ?, ?)""";
-    
-    try (Connection c = ConexionDB.getConnection();
-         PreparedStatement stmt = c.prepareStatement(sql)) {
-        stmt.setString(1, cliente.getNombre_1());
-        stmt.setString(2, cliente.getApellido_1());
-        stmt.setString(3, cliente.getDirrecion_cliente());
-        stmt.setString(4, cliente.getTelefono_cliente());
-        stmt.executeUpdate();
-    }
-}
 
-public static void main(String[] args) {
-    try {
-        ClienteDAO DAO = new ClienteDAO();
-        Cliente c1 = new Cliente();
-        c1.setNombre_1("Juan");
-        c1.setApellido_1("Carlos");
-        c1.setDirrecion_cliente("Calle 123, Ciudad");
-        c1.setTelefono_cliente("12345678");
-        DAO.crearCliente(c1);
-        System.out.println("Cliente creado con éxito!");
-    } catch (SQLException e) {
-        System.err.println("Error: " + e.getMessage());
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, cliente.getNombre_1());
+            stmt.setString(2, cliente.getApellido_1());
+            stmt.setString(3, cliente.getDirrecion_cliente());
+            stmt.setString(4, cliente.getTelefono_cliente());
+            stmt.executeUpdate();
+        }
     }
-}
+ public List<Cliente> leerTodosClientes() throws SQLException {
+        String sql = "SELECT * FROM Clientes";
+        List<Cliente> clientes = new ArrayList<>();
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNombre_1(rs.getString("nombre_1"));
+                cliente.setApellido_1(rs.getString("apellido_1"));
+                cliente.setDirrecion_cliente(rs.getString("direccion_cliente"));
+                cliente.setTelefono_cliente(rs.getString("telefono_cliente"));
+                clientes.add(cliente);
+            }
+        }
+        return clientes;
+    }
+
+    public void actualizarCliente(Cliente cliente) throws SQLException {
+        String sql = "UPDATE Clientes SET primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, celular = ?, direccion = ?, cedula = ? WHERE id_cliente = ?";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, cliente.getNombre_1());
+            stmt.setString(2, cliente.getApellido_1());
+            stmt.setString(3, cliente.getDirrecion_cliente());
+            stmt.setString(4, cliente.getTelefono_cliente());
+            stmt.executeUpdate();
+        }
+    }
+
+// Método para eliminar un cliente
+    public void eliminarCliente(int idCliente) throws SQLException {
+        String sql = "DELETE FROM Clientes WHERE id_cliente = ?";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setInt(1, idCliente);
+            stmt.executeUpdate();
+        }
+    }
+
+// Método Main
+    public static void main(String[] args) {
+        try {
+            ClienteDAO dao = new ClienteDAO();
+
+            // Actualizar un cliente
+            Cliente cliente = new Cliente();
+            cliente.setId_cliente(1); // ID existente
+            cliente.setNombre_1("Pedro");
+            cliente.setApellido_1("Guzman");
+            cliente.setDirrecion_cliente("La Gateada");
+            cliente.setTelefono_cliente("86758433");
+            dao.actualizarCliente(cliente);
+            System.out.println("Cliente actualizado.");
+
+            // Eliminar un cliente
+            dao.eliminarCliente(2); // ID a eliminar
+            System.out.println("Cliente eliminado.");
+
+            // Leer y mostrar todos los clientes para verificar
+            List<Cliente> clientes = dao.leerTodosClientes();
+            System.out.println("Lista de clientes:");
+            for (Cliente cli : clientes) {
+                System.out.println("ID: " + cli.getId_cliente()
+                        + ", Nombre: " + cli.getNombre_1()+ " " + cli.getApellido_1()
+                        + " " + cli.getDirrecion_cliente()+ " " + cli.getTelefono_cliente());
+                        
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
 }

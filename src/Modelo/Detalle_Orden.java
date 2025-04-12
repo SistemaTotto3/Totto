@@ -3,15 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+
 import java.util.Date;
+
 /**
  *
  * @author yuri guevara
  */
 public class Detalle_Orden {
+
     private int id_detalle_orden;
     private int idOrden; //Relacion con orden
-    private int idProducto ; //Relacion con producto
+    private int idProducto; //Relacion con producto
     private Date fecha_orden;
     private String estado_orden;
 
@@ -65,7 +68,5 @@ public class Detalle_Orden {
     public void setEstado_orden(String estado_orden) {
         this.estado_orden = estado_orden;
     }
-    
-   
-    
+
 }

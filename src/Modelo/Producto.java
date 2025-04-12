@@ -9,6 +9,7 @@ package Modelo;
  * @author yuri guevara
  */
 public class Producto {
+
     private int id_producto;
     private String nombre_producto;
     private float precio_costo;
@@ -55,7 +56,5 @@ public class Producto {
     public void setPrecio_venta(float precio_venta) {
         this.precio_venta = precio_venta;
     }
-    
-    
-    
+
 }
