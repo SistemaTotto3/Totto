@@ -55,13 +55,14 @@ public class ClienteDAO {
     }
 
     public void actualizarCliente(Cliente cliente) throws SQLException {
-        String sql = "UPDATE Clientes SET primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, celular = ?, direccion = ?, cedula = ? WHERE id_cliente = ?";
+        String sql = "UPDATE Clientes SET nombre_1 = ?, apellido_1 = ?, direccion_cliente = ?, telefono_cliente= ? WHERE id_cliente = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, cliente.getNombre_1());
             stmt.setString(2, cliente.getApellido_1());
             stmt.setString(3, cliente.getDirrecion_cliente());
             stmt.setString(4, cliente.getTelefono_cliente());
+            stmt.setInt(5, cliente.getId_cliente());
             stmt.executeUpdate();
         }
     }
