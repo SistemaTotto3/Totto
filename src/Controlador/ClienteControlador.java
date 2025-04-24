@@ -53,7 +53,7 @@ public class ClienteControlador {
             String telefono_cliente) {
         try {
             Cliente cliente = new Cliente();
-            cliente.setId_cliente(id_cliente);
+            cliente.setIdCliente(id_cliente);
             cliente.setNombre_1(nombre_1);
             cliente.setApellido_1(apellido_1);
             cliente.setDirrecion_cliente(direccion_cliente);
@@ -87,7 +87,7 @@ public class ClienteControlador {
         if (clientes != null) {
             System.out.println("Lista de clientes:");
             for (Cliente c : clientes) {
-                System.out.println("ID: " + c.getId_cliente()
+                System.out.println("ID: " + c.getIdCliente()
                         + ", Nombre: " + c.getNombre_1() + " " + c.getApellido_1()
                         + ", direccion_cliente: " + c.getDirrecion_cliente()+ ", telefono_cliente:"+ c.getTelefono_cliente());
             }

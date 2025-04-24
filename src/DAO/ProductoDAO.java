@@ -21,7 +21,7 @@ public class ProductoDAO {
 
     public void crearProducto(Producto producto) throws SQLException {
         String sql = """
-        INSERT INTO Productos (
+        INSERT INTO Producto (
             nombre_producto, 
             precio_costo, 
             precio_venta
@@ -36,7 +36,7 @@ public class ProductoDAO {
     }
 
     public List<Producto> leerTodosProductos() throws SQLException {
-        String sql = "SELECT * FROM Productos";
+        String sql = "SELECT * FROM Producto";
         List<Producto> productos = new ArrayList<>();
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
@@ -56,7 +56,7 @@ public class ProductoDAO {
 // Método para actualizar un producto
 
     public void actualizarProducto(Producto producto) throws SQLException {
-        String sql = "UPDATE Productos SET nombre_producto = ?, precio_costo = ?, precio_venta = ? WHERE id_producto = ?";
+        String sql = "UPDATE Producto SET nombre_producto = ?, precio_costo = ?, precio_venta = ? WHERE id_producto = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre_producto());
@@ -69,7 +69,7 @@ public class ProductoDAO {
 
 // Método para eliminar un producto
     public void eliminarProducto(int idProducto) throws SQLException {
-        String sql = "DELETE FROM Productos WHERE id_producto = ?";
+        String sql = "DELETE FROM Producto WHERE id_producto = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, idProducto);

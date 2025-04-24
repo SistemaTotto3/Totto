@@ -10,29 +10,29 @@ package Modelo;
  */
 public class Cliente {
 
-    private int id_cliente;
+    private int idCliente;
     private String nombre_1;
     private String apellido_1;
     private String dirrecion_cliente;
     private String telefono_cliente;
 
-    public Cliente(int id_cliente, String nombre_1, String apellido_1, String dirrecion_cliente, String telefono_cliente) {
-        this.id_cliente = id_cliente;
+    public Cliente() {
+    }
+
+    public Cliente(int idCliente, String nombre_1, String apellido_1, String dirrecion_cliente, String telefono_cliente) {
+        this.idCliente = idCliente;
         this.nombre_1 = nombre_1;
         this.apellido_1 = apellido_1;
         this.dirrecion_cliente = dirrecion_cliente;
         this.telefono_cliente = telefono_cliente;
     }
 
-    public Cliente() {
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public int getId_cliente() {
-        return id_cliente;
-    }
-
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNombre_1() {
@@ -66,5 +66,7 @@ public class Cliente {
     public void setTelefono_cliente(String telefono_cliente) {
         this.telefono_cliente = telefono_cliente;
     }
+
+
 
 }
