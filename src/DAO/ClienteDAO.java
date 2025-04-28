@@ -38,7 +38,7 @@ public class ClienteDAO {
     }
 
     public List<Cliente> leerTodosClientes() throws SQLException {
-        String sql = "SELECT * FROM Cliente";
+        String sql = "SELECT * FROM Cliente ";
         List<Cliente> clientes = new ArrayList<>();
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
