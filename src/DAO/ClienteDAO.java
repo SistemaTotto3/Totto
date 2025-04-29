@@ -38,7 +38,7 @@ public class ClienteDAO {
     }
 
     public List<Cliente> leerTodosClientes() throws SQLException {
-        String sql = "SELECT * FROM Cliente";
+        String sql = "SELECT * FROM Cliente ";
         List<Cliente> clientes = new ArrayList<>();
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
@@ -100,10 +100,9 @@ public class ClienteDAO {
                 System.out.println("ID: " + cli.getIdCliente()
                         + ", Nombre: " + cli.getNombre_1() + " " + cli.getApellido_1()
                         + " " + cli.getDirrecion_cliente() + " " + cli.getTelefono_cliente());
-
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
         }
-    }
+    }   
 }
