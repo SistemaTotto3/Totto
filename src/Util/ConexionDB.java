@@ -13,11 +13,24 @@ import java.sql.SQLException;
  * @author COMPHP
  */
 public class ConexionDB {
+<<<<<<< HEAD
 
     private static final String URL = "jdbc:mysql://localhost:3306/Sistematotto?useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "monge123";
 
+=======
+      private static final String URL="jdbc:mysql://localhost:3306/Sistematotto?useSSL=false";
+    private static final String USER="root";
+
+    private static final String PASSWORD="amapola123";
+
+ 
+
+
+
+    
+>>>>>>> 7d12baa856eb0e7c5f9e816b7f70f97fb733b50e
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

@@ -4,7 +4,14 @@
  */
 package DAO;
 
-
+import Modelo.Insumo;
+import Util.ConexionDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
 
 /**
  *
@@ -12,5 +19,81 @@ package DAO;
  */
 public class InsumoDAO {
 
-    
+    public void crearInsumo(Insumo insumo) throws SQLException {
+        String sql = """
+        INSERT INTO Insumo (
+            nombre_insumo, 
+            precio_insumo
+        ) VALUES (?, ?)""";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, insumo.getNombre_insumo());
+            stmt.setFloat(2, insumo.getPrecio_insumo());
+            stmt.executeUpdate();
+        }
+    }
+
+    public List<Insumo> leerTodosInsumos() throws SQLException {
+        String sql = "SELECT * FROM Insumo";
+        List<Insumo> insumos = new ArrayList<>();
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Insumo insumo = new Insumo();
+                insumo.setId_insumo(rs.getInt("id_insumo"));
+                insumo.setNombre_insumo(rs.getString("nombre_insumo"));
+                insumo.setPrecio_insumo(rs.getFloat("precio_insumo"));
+                insumos.add(insumo);
+            }
+        }
+        return insumos;
+    }
+
+    public void actualizarInsumo(Insumo insumo) throws SQLException {
+        String sql = "UPDATE Insumo SET nombre_insumo = ?, precio_insumo = ? WHERE id_insumo = ?";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, insumo.getNombre_insumo());
+            stmt.setFloat(2, insumo.getPrecio_insumo());
+            stmt.setInt(3, insumo.getId_insumo());
+            stmt.executeUpdate();
+        }
+    }
+
+    public void eliminarInsumo(int idInsumo) throws SQLException {
+        String sql = "DELETE FROM Insumo WHERE id_insumo = ?";
+
+        try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setInt(1, idInsumo);
+            stmt.executeUpdate();
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            InsumoDAO dao = new InsumoDAO();
+
+            // Actualizar un insumo
+            Insumo insumo = new Insumo();
+            insumo.setId_insumo(1); // ID existente
+            insumo.setNombre_insumo("Pan brioche artesanal");
+            insumo.setPrecio_insumo(0.75f);
+            dao.actualizarInsumo(insumo);
+            System.out.println("Insumo actualizado.");
+
+            // Leer y mostrar todos los insumos para verificar
+            List<Insumo> insumos = dao.leerTodosInsumos();
+            System.out.println("Lista de insumos:");
+            for (Insumo ins : insumos) {
+                System.out.println("ID: " + ins.getId_insumo()
+                        + ", Nombre: " + ins.getNombre_insumo()
+                        + ", Precio: " + ins.getPrecio_insumo());
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+     
+
+  
 }
