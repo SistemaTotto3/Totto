@@ -3,22 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
+
 import DAO.CuentaDAO;
 import Modelo.Cuenta;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author yuri guevara
  */
 public class CuentaControlador {
+
     private final CuentaDAO cuentaDAO;
 
     public CuentaControlador() {
         this.cuentaDAO = new CuentaDAO();
     }
-    
+
     // Método para crear una nueva cuenta
     public void crearCuenta(int idOrden, int idCliente, java.sql.Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
         try {
@@ -34,7 +37,7 @@ public class CuentaControlador {
             JOptionPane.showMessageDialog(null, "Error al crear la cuenta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     // Método para obtener todas las cuentas
     public List<Cuenta> obtenerTodasCuentas() {
         try {
@@ -44,8 +47,8 @@ public class CuentaControlador {
             return null;
         }
     }
-    
-     // Método para actualizar una cuenta existente
+
+    // Método para actualizar una cuenta existente
     public void actualizarCuenta(int id_cuenta, int idOrden, int idCliente, java.sql.Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
         try {
             Cuenta cuenta = new Cuenta();
@@ -61,8 +64,8 @@ public class CuentaControlador {
             JOptionPane.showMessageDialog(null, "Error al actualizar la cuenta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-     // Método para eliminar una cuenta
+
+    // Método para eliminar una cuenta
     public void eliminarCuenta(int idCuenta) {
         try {
             cuentaDAO.eliminarCuenta(idCuenta);
@@ -71,8 +74,8 @@ public class CuentaControlador {
             JOptionPane.showMessageDialog(null, "Error al eliminar la cuenta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-     // Método main para pruebas
+
+    // Método main para pruebas
     public static void main(String[] args) {
         CuentaControlador controlador = new CuentaControlador();
 
@@ -100,5 +103,4 @@ public class CuentaControlador {
         controlador.eliminarCuenta(1);
     }
 
-    
 }

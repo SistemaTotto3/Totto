@@ -13,28 +13,28 @@ import java.sql.SQLException;
  * @author COMPHP
  */
 public class ConexionDB {
-      private static final String URL="jdbc:mysql://localhost:3306/Sistematotto?useSSL=false";
-    private static final String USER="root";
-    private static final String PASSWORD="carlos3vg6";
-    
+
+    private static final String URL = "jdbc:mysql://localhost:3306/Sistematotto?useSSL=false";
+    private static final String USER = "root";
+    private static final String PASSWORD = "monge123";
+
     public static Connection getConnection() throws SQLException {
-     try{
-         Class.forName("com.mysql.cj.jdbc.Driver");
-         return DriverManager.getConnection(URL, USER, PASSWORD);
-      }catch (ClassNotFoundException e){
-       throw new SQLException("Driver de MYSQL no encontrado",e);
-      }
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Driver de MYSQL no encontrado", e);
+        }
     }
 
-
 // Metodo tem´poral para probar 
-public static void main(String[]args){
-try{
-    Connection c = getConnection();
-    System.out.println("conexion exitosa a Sistematotto!");
-    c.close();
-  }catch (SQLException e){
-      System.out.println("Error de conexion:" + e.getMessage());
-  }
-}
+    public static void main(String[] args) {
+        try {
+            Connection c = getConnection();
+            System.out.println("conexion exitosa a Sistematotto!");
+            c.close();
+        } catch (SQLException e) {
+            System.out.println("Error de conexion:" + e.getMessage());
+        }
+    }
 }
