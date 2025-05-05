@@ -8,12 +8,12 @@ package Vista;
  *
  * @author COMPHP
  */
-public class VistaProductos extends javax.swing.JPanel {
+public class VistaClientes extends javax.swing.JPanel {
 
     /**
-     * Creates new form VistaProductos
+     * Creates new form VistaClientes
      */
-    public VistaProductos() {
+    public VistaClientes() {
         initComponents();
     }
 
@@ -26,67 +26,52 @@ public class VistaProductos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jlabel1 = new javax.swing.JLabel();
-        nombre_producto = new javax.swing.JTextField();
         jlabel2 = new javax.swing.JLabel();
-        precio_costo = new javax.swing.JTextField();
+        nombre_1 = new javax.swing.JTextField();
+        apellido_1 = new javax.swing.JTextField();
+        dirrecion_cliente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        precio_venta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        existencia = new javax.swing.JTextField();
+        telefono_cliente = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
-        Buscar = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
         Actualizar = new javax.swing.JButton();
-        BuscarProducto = new javax.swing.JTextField();
+        Eliminar = new javax.swing.JButton();
+        BuscarCliente = new javax.swing.JTextField();
+        Buscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jlabel1.setText("nombre_1");
 
-        jlabel1.setText("nombre_producto");
+        jlabel2.setText("apellido_1");
 
-        nombre_producto.addActionListener(new java.awt.event.ActionListener() {
+        nombre_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombre_productoActionPerformed(evt);
+                nombre_1ActionPerformed(evt);
             }
         });
 
-        jlabel2.setText("precio_costo");
-
-        precio_costo.addActionListener(new java.awt.event.ActionListener() {
+        apellido_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precio_costoActionPerformed(evt);
+                apellido_1ActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("precio_venta");
-
-        precio_venta.addActionListener(new java.awt.event.ActionListener() {
+        dirrecion_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precio_ventaActionPerformed(evt);
+                dirrecion_clienteActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("existencia");
+        jLabel3.setText("dirrecion_cliente");
 
-        existencia.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("telefono_cliente");
+
+        telefono_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                existenciaActionPerformed(evt);
+                telefono_clienteActionPerformed(evt);
             }
         });
 
@@ -97,10 +82,10 @@ public class VistaProductos extends javax.swing.JPanel {
             }
         });
 
-        Buscar.setText("Buscar");
-        Buscar.addActionListener(new java.awt.event.ActionListener() {
+        Actualizar.setText("Actualizar");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarActionPerformed(evt);
+                ActualizarActionPerformed(evt);
             }
         });
 
@@ -111,16 +96,16 @@ public class VistaProductos extends javax.swing.JPanel {
             }
         });
 
-        Actualizar.setText("Actualizar");
-        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+        BuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ActualizarActionPerformed(evt);
+                BuscarClienteActionPerformed(evt);
             }
         });
 
-        BuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarProductoActionPerformed(evt);
+                BuscarActionPerformed(evt);
             }
         });
 
@@ -143,48 +128,48 @@ public class VistaProductos extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(nombre_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nombre_1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(precio_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(apellido_1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jlabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(precio_venta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dirrecion_cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(telefono_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
-                                .addComponent(BuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(109, 109, 109)
                                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 118, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                        .addGap(48, 48, 48))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(76, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
-                .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,25 +178,26 @@ public class VistaProductos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(precio_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(precio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(existencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nombre_producto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(apellido_1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dirrecion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(telefono_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(BuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
+                        .addGap(11, 11, 11))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                            .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -222,67 +208,63 @@ public class VistaProductos extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombre_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_productoActionPerformed
+    private void nombre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombre_productoActionPerformed
+    }//GEN-LAST:event_nombre_1ActionPerformed
 
-    private void precio_costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio_costoActionPerformed
+    private void apellido_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellido_1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_precio_costoActionPerformed
+    }//GEN-LAST:event_apellido_1ActionPerformed
 
-    private void precio_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio_ventaActionPerformed
+    private void dirrecion_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirrecion_clienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_precio_ventaActionPerformed
+    }//GEN-LAST:event_dirrecion_clienteActionPerformed
 
-    private void existenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existenciaActionPerformed
+    private void telefono_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefono_clienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_existenciaActionPerformed
+    }//GEN-LAST:event_telefono_clienteActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GuardarActionPerformed
 
-    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarActionPerformed
+    }//GEN-LAST:event_ActualizarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EliminarActionPerformed
 
-    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+    private void BuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ActualizarActionPerformed
+    }//GEN-LAST:event_BuscarClienteActionPerformed
 
-    private void BuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarProductoActionPerformed
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarProductoActionPerformed
+    }//GEN-LAST:event_BuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
     private javax.swing.JButton Buscar;
-    private javax.swing.JTextField BuscarProducto;
+    private javax.swing.JTextField BuscarCliente;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Guardar;
-    private javax.swing.JTextField existencia;
+    private javax.swing.JTextField apellido_1;
+    private javax.swing.JTextField dirrecion_cliente;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlabel2;
-    private javax.swing.JTextField nombre_producto;
-    private javax.swing.JTextField precio_costo;
-    private javax.swing.JTextField precio_venta;
+    private javax.swing.JTextField nombre_1;
+    private javax.swing.JTextField telefono_cliente;
     // End of variables declaration//GEN-END:variables
 }

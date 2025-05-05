@@ -24,13 +24,15 @@ public class ProductoDAO {
         INSERT INTO Producto (
             nombre_producto, 
             precio_costo, 
-            precio_venta
-        ) VALUES (?, ?, ?)""";
+            precio_venta,
+            existencia
+        ) VALUES (?, ?, ?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre_producto());
             stmt.setFloat(2, producto.getPrecio_costo());
             stmt.setFloat(3, producto.getPrecio_venta());
+            stmt.setInt(4, producto.getExistencia());
             stmt.executeUpdate();
         }
     }
@@ -46,6 +48,7 @@ public class ProductoDAO {
                 producto.setNombre_producto(rs.getString("nombre_producto"));
                 producto.setPrecio_costo(rs.getFloat("precio_costo"));
                 producto.setPrecio_venta(rs.getFloat("id_categoria"));
+                producto.setExistencia(rs.getInt("existencia"));
                 productos.add(producto);
             }
         }
@@ -62,7 +65,8 @@ public class ProductoDAO {
             stmt.setString(1, producto.getNombre_producto());
             stmt.setFloat(2, producto.getPrecio_costo());
             stmt.setFloat(3, producto.getPrecio_venta());
-            stmt.setInt(4, producto.getId_producto());
+            stmt.setInt(4, producto.getExistencia());
+            stmt.setInt(5, producto.getId_producto());
             stmt.executeUpdate();
         }
     }
@@ -88,6 +92,7 @@ public class ProductoDAO {
             producto.setNombre_producto("Hamburguesa Actualizada");
             producto.setPrecio_costo(30);
             producto.setPrecio_venta(90);
+            producto.setExistencia(1);
             dao.actualizarProducto(producto);
             System.out.println("Producto actualizado.");
 
@@ -98,7 +103,7 @@ public class ProductoDAO {
                 System.out.println("ID: " + prod.getId_producto()
                         + ", Nombre: " + prod.getNombre_producto()
                         + ", Descripción: " + prod.getPrecio_costo()
-                        + ", Categoría ID: " + prod.getPrecio_venta());
+                        + ", Categoría ID: " + prod.getPrecio_venta()+ ", existencia: " + prod.getExistencia());
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());

@@ -67,6 +67,4 @@ public class Cliente {
         this.telefono_cliente = telefono_cliente;
     }
 
-
-
 }

@@ -23,12 +23,13 @@ public class ProductoControlador {
     }
 
     // Método para crear un nuevo producto
-    public void crearProducto(String nombre_producto, float precio_costo, float precio_venta) {
+    public void crearProducto(String nombre_producto, float precio_costo, float precio_venta,int existencia) {
         try {
             Producto producto = new Producto();
             producto.setNombre_producto(nombre_producto);
             producto.setPrecio_costo(precio_costo);
             producto.setPrecio_venta(precio_venta);
+            producto.setExistencia(existencia);
             productoDAO.crearProducto(producto);
             JOptionPane.showMessageDialog(null, "Producto creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -47,13 +48,14 @@ public class ProductoControlador {
     }
 
     // Método para actualizar un producto existente
-    public void actualizarProducto(int id_producto, String nombre_producto, float precio_costo, float precio_venta) {
+    public void actualizarProducto(int id_producto, String nombre_producto, float precio_costo, float precio_venta, int existencia) {
         try {
             Producto producto = new Producto();
             producto.setId_producto(id_producto);
             producto.setNombre_producto(nombre_producto);
             producto.setPrecio_costo(precio_costo);
             producto.setPrecio_venta(precio_venta);
+             producto.setExistencia(existencia);
             productoDAO.actualizarProducto(producto);
             JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -76,7 +78,7 @@ public class ProductoControlador {
         ProductoControlador controlador = new ProductoControlador();
 
         // Crear un producto
-        controlador.crearProducto("Hamburguesas",200, 1500);
+        controlador.crearProducto("Hamburguesas",200, 1500,2);
 
         // Leer todos los productos
         List<Producto> productos = controlador.obtenerTodosProductos();
@@ -85,12 +87,12 @@ public class ProductoControlador {
             for (Producto p : productos) {
                 System.out.println("ID: " + p.getId_producto()
                         + ", nombre_producto: " + p.getNombre_producto()
-                        + ", precio_costo: " + p.getPrecio_costo()+ "precio_venta:"+ p.getPrecio_venta());
+                        + ", precio_costo: " + p.getPrecio_costo()+ ", precio_venta:"+ p.getPrecio_venta()+ "existencia:"+p.getExistencia());
             }
         }
 
         // Actualizar un producto (suponiendo que ID 1 existe)
-        controlador.actualizarProducto(1, "Hamburguesas simple", 250, 500);
+        controlador.actualizarProducto(1, "Hamburguesas simple", 250, 500,7);
 
         // Eliminar un producto
         controlador.eliminarProducto(1);

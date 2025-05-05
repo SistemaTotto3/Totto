@@ -14,12 +14,14 @@ public class Producto {
     private String nombre_producto;
     private float precio_costo;
     private float precio_venta;
+    private int existencia;
 
-    public Producto(int id_producto, String nombre_producto, float precio_costo, float precio_venta) {
+    public Producto(int id_producto, String nombre_producto, float precio_costo, float precio_venta, int existencia) {
         this.id_producto = id_producto;
         this.nombre_producto = nombre_producto;
         this.precio_costo = precio_costo;
         this.precio_venta = precio_venta;
+        this.existencia = existencia;
     }
 
     public Producto() {
@@ -57,4 +59,11 @@ public class Producto {
         this.precio_venta = precio_venta;
     }
 
+    public int getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(int existencia) {
+        this.existencia = existencia;
+    }
 }
