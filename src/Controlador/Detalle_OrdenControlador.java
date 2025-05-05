@@ -23,11 +23,11 @@ public class Detalle_OrdenControlador {
     }
 
     // Método para crear un nuevo Detalle de Orden
-    public void crearDetalleOrden(int idOrden, int idProducto, java.sql.Date fechaOrden, String estadoOrden) {
+    public void crearDetalleOrden(int idOrden, int id_producto, java.sql.Date fechaOrden, String estadoOrden) {
         try {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setIdOrden(idOrden);
-            detalle.setIdProducto(idProducto);
+            detalle.setId_producto(id_producto);
             detalle.setFecha_orden(fechaOrden);
             detalle.setEstado_orden(estadoOrden);
             detalleOrdenDAO.crearDetalleOrden(detalle);
@@ -48,12 +48,12 @@ public class Detalle_OrdenControlador {
     }
 
     // Método para actualizar un Detalle de Orden existente
-    public void actualizarDetalleOrden(int idDetalleOrden, int idOrden, int idProducto, java.sql.Date fechaOrden, String estadoOrden) {
+    public void actualizarDetalleOrden(int idDetalleOrden, int idOrden, int id_producto, java.sql.Date fechaOrden, String estadoOrden) {
         try {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setId_detalle_orden(idDetalleOrden);
             detalle.setIdOrden(idOrden);
-            detalle.setIdProducto(idProducto);
+            detalle.setId_producto(id_producto);
             detalle.setFecha_orden(fechaOrden);
             detalle.setEstado_orden(estadoOrden);
             detalleOrdenDAO.actualizarDetalleOrden(detalle);
@@ -89,7 +89,7 @@ public class Detalle_OrdenControlador {
             for (Detalle_Orden d : detalles) {
                 System.out.println("ID Detalle Orden: " + d.getId_detalle_orden()
                         + ", ID Orden: " + d.getIdOrden()
-                        + ", ID Producto: " + d.getIdProducto()
+                        + ", ID Producto: " + d.getId_producto()
                         + ", Fecha Orden: " + d.getFecha_orden()
                         + ", Estado Orden: " + d.getEstado_orden());
             }
