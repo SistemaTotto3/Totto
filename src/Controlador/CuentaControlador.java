@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
 import DAO.CuentaDAO;
 import Modelo.Cuenta;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -23,7 +20,7 @@ public class CuentaControlador {
     }
 
     // Método para crear una nueva cuenta
-    public void crearCuenta(int idOrden, int idCliente, java.sql.Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
+    public void crearCuenta(int idOrden, int idCliente, LocalDateTime fecha_cuenta, float total_cuenta, String estado_cuenta) {
         try {
             Cuenta cuenta = new Cuenta();
             cuenta.setIdOrden(idOrden);
@@ -49,7 +46,7 @@ public class CuentaControlador {
     }
 
     // Método para actualizar una cuenta existente
-    public void actualizarCuenta(int id_cuenta, int idOrden, int idCliente, java.sql.Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
+    public void actualizarCuenta(int id_cuenta, int idOrden, int idCliente, LocalDateTime fecha_cuenta, float total_cuenta, String estado_cuenta) {
         try {
             Cuenta cuenta = new Cuenta();
             cuenta.setId_cuenta(id_cuenta);
@@ -80,7 +77,7 @@ public class CuentaControlador {
         CuentaControlador controlador = new CuentaControlador();
 
         // Crear una cuenta
-        controlador.crearCuenta(1, 1, java.sql.Date.valueOf("2025-04-29"), 500.0f, "Activa");
+        controlador.crearCuenta(1, 1, LocalDateTime.of(2025, 4, 29, 10, 0), 500.0f, "Activa");
 
         // Leer todas las cuentas
         List<Cuenta> cuentas = controlador.obtenerTodasCuentas();
@@ -97,7 +94,7 @@ public class CuentaControlador {
         }
 
         // Actualizar una cuenta (suponiendo que ID 1 existe)
-        controlador.actualizarCuenta(1, 2, 2, java.sql.Date.valueOf("2025-05-01"), 700.0f, "Cerrada");
+        controlador.actualizarCuenta(1, 2, 2, LocalDateTime.of(2025, 5, 1, 12, 0), 700.0f, "Cerrada");
 
         // Eliminar una cuenta
         controlador.eliminarCuenta(1);
