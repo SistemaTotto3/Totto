@@ -24,15 +24,15 @@ public class Detalle_OrdenDAO {
         String sql = """
         INSERT INTO  Detalle_Orden (
             idOrden, 
-            idProducto, 
+            id_producto, 
             fecha_orden, 
             estado_orden
         ) VALUES (?, ?, ?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdOrden());
-            stmt.setInt(2, detalle.getIdProducto());
-            stmt.setDate(3, (java.sql.Date) detalle.getFecha_orden());
+            stmt.setInt(2, detalle.getId_producto());
+            stmt.setDate(3, new java.sql.Date(detalle.getFecha_orden().getTime()));
             stmt.setString(4, detalle.getEstado_orden());
             stmt.executeUpdate();
         }
@@ -47,7 +47,7 @@ public class Detalle_OrdenDAO {
                 Detalle_Orden detalle = new Detalle_Orden();
                 detalle.setId_detalle_orden(rs.getInt("id_detalle_orden"));
                 detalle.setIdOrden(rs.getInt("idOrden"));
-                detalle.setIdProducto(rs.getInt("idProducto"));
+                detalle.setId_producto(rs.getInt("id_producto"));
                 detalle.setFecha_orden(rs.getDate("fecha_orden"));
                 detalle.setEstado_orden(rs.getString("estado_orden"));
                 detalles.add(detalle);
@@ -57,12 +57,12 @@ public class Detalle_OrdenDAO {
     }
 
     public void actualizarDetalleOrden(Detalle_Orden detalle) throws SQLException {
-        String sql = "UPDATE Detalle_Orden SET idOrden = ?, idProducto = ?, fecha_orden = ?, estado_orden= ? WHERE id_detalle_orden = ?";
+        String sql = "UPDATE Detalle_Orden SET idOrden = ?, id_producto = ?, fecha_orden = ?, estado_orden= ? WHERE id_detalle_orden = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdOrden());
-            stmt.setInt(2, detalle.getIdProducto());
-            stmt.setDate(3, (Date) detalle.getFecha_orden());
+            stmt.setInt(2, detalle.getId_producto());
+            stmt.setDate(3, new java.sql.Date(detalle.getFecha_orden().getTime()));
             stmt.setString(4, detalle.getEstado_orden());
             stmt.setInt(5, detalle.getId_detalle_orden());
             stmt.executeUpdate();
@@ -70,7 +70,7 @@ public class Detalle_OrdenDAO {
     }
 
 // Método para eliminar un cliente
-    public void eliminarCliente(int idDetalleOrden) throws SQLException {
+    public void eliminarDetalleOrden(int idDetalleOrden) throws SQLException {
         String sql = "DELETE FROM Detalle_Orden WHERE id_detalle_orden = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
@@ -88,19 +88,20 @@ public class Detalle_OrdenDAO {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setId_detalle_orden(1); // ID existente
             detalle.setIdOrden(2);
-            detalle.setIdProducto(3);
+            detalle.setId_producto(3);
             detalle.setFecha_orden(new java.util.Date());
+            
             detalle.setEstado_orden("Activa");
             dao.actualizarDetalleOrden(detalle);
-            System.out.println("Cliente actualizado.");
+            System.out.println("Detalle_Orden actualizado.");
 
             // Leer y mostrar todos los clientes para verificar
             List<Detalle_Orden> detalles = dao.leerTodosDetalle_Orden();
             System.out.println("Lista de detalles_orden:");
             for (Detalle_Orden det : detalles) {
-                System.out.println("ID: " + det.getId_detalle_orden()
-                        + ", id_Orden: " + det.getIdOrden() + " " + det.getIdProducto()
-                        + " " + det.getFecha_orden() + " " + det.getEstado_orden());
+                System.out.println("id_detalle_orden: " + det.getId_detalle_orden()
+                        + ", idOrden: " + det.getIdOrden() + "id_producto " + det.getId_producto()
+                        + " fecha_orden" + det.getFecha_orden() + " estado_orden" + det.getEstado_orden());
 
             }
         } catch (SQLException e) {

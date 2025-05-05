@@ -66,7 +66,7 @@ public class Detalle_OrdenControlador {
     // Método para eliminar un Detalle de Orden
     public void eliminarDetalleOrden(int idDetalleOrden) {
         try {
-            detalleOrdenDAO.eliminarDetalle_Orden(idDetalleOrden);
+            detalleOrdenDAO.eliminarDetalleOrden(idDetalleOrden);
             JOptionPane.showMessageDialog(null, "Detalle de Orden eliminado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el detalle de orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

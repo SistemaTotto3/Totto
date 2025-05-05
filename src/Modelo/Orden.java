@@ -13,14 +13,14 @@ import java.util.Date;
  */
 public class Orden {
 
-    private int id_orden;
-    private int idCuenta; //Relacion con cuenta
+    private int idOrden;
+    private int id_cuenta; //Relacion con cuenta
     private Date fecha_orden;
     private List<Detalle_Orden> detalle;
 
     public Orden(int id_orden, int idCuenta, Date fecha_orden, List<Detalle_Orden> detalle) {
-        this.id_orden = id_orden;
-        this.idCuenta = idCuenta;
+        this.idOrden = id_orden;
+        this.id_cuenta = idCuenta;
         this.fecha_orden = fecha_orden;
         this.detalle = detalle;
     }
@@ -28,20 +28,21 @@ public class Orden {
     public Orden() {
     }
 
-    public int getId_orden() {
-        return id_orden;
+    
+    public int getIdOrden() {
+        return idOrden;
     }
 
-    public void setId_orden(int id_orden) {
-        this.id_orden = id_orden;
+    public void setIdOrden(int idOrden) {
+        this.idOrden = idOrden;
     }
 
-    public int getIdCuenta() {
-        return idCuenta;
+    public int getId_cuenta() {
+        return id_cuenta;
     }
 
-    public void setIdCuenta(int idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setId_cuenta(int id_cuenta) {
+        this.id_cuenta = id_cuenta;
     }
 
     public Date getFecha_orden() {
@@ -58,6 +59,11 @@ public class Orden {
 
     public void setDetalle(List<Detalle_Orden> detalle) {
         this.detalle = detalle;
+    }
+
+    
+    public java.sql.Date getFechaOrden() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
