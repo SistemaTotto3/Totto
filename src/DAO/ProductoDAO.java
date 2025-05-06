@@ -59,7 +59,7 @@ public class ProductoDAO {
 // Método para actualizar un producto
 
     public void actualizarProducto(Producto producto) throws SQLException {
-        String sql = "UPDATE Producto SET nombre_producto = ?, precio_costo = ?, precio_venta = ? WHERE id_producto = ?";
+        String sql = "UPDATE Producto SET nombre_producto = ?, precio_costo = ?, precio_venta = ?,existencia = ? WHERE id_producto = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre_producto());
@@ -102,8 +102,8 @@ public class ProductoDAO {
             for (Producto prod : productos) {
                 System.out.println("ID: " + prod.getId_producto()
                         + ", Nombre: " + prod.getNombre_producto()
-                        + ", Descripción: " + prod.getPrecio_costo()
-                        + ", Categoría ID: " + prod.getPrecio_venta()+ ", existencia: " + prod.getExistencia());
+                        + ", precio_costo: " + prod.getPrecio_costo()
+                        + ", precio_venta: " + prod.getPrecio_venta()+ ", existencia: " + prod.getExistencia());
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
