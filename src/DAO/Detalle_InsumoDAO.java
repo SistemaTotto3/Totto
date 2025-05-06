@@ -91,7 +91,7 @@ public class Detalle_InsumoDAO {
 
             // Leer y mostrar todos los clientes para verificar
             List<Detalle_Insumo> detalles = dao.leerTodosDetalle_Insumo();
-            System.out.println("Lista de detalles_orden:");
+            System.out.println("Lista de detalles_Insumo:");
             for (Detalle_Insumo det : detalles) {
                 System.out.println("id_detalle_insumo: " + det.getId_detalle_insumo()
                         + ", id_insumo: " + det.getId_insumo()+ "id_producto " + det.getId_producto()

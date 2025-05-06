@@ -152,7 +152,7 @@ public class VistaClientes extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
                                 .addComponent(BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(109, 109, 109)
+                                .addGap(80, 80, 80)
                                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(48, 48, 48))
                     .addGroup(jPanel1Layout.createSequentialGroup()

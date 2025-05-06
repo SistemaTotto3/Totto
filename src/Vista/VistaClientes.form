@@ -63,7 +63,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                   <Component id="BuscarCliente" min="-2" pref="353" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                                   <Component id="Guardar" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
