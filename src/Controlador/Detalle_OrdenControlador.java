@@ -7,6 +7,7 @@ package Controlador;
 import DAO.Detalle_OrdenDAO;
 import Modelo.Detalle_Orden;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -23,7 +24,7 @@ public class Detalle_OrdenControlador {
     }
 
     // Método para crear un nuevo Detalle de Orden
-    public void crearDetalleOrden(int idOrden, int id_producto, java.sql.Date fechaOrden, String estadoOrden) {
+    public void crearDetalleOrden(int idOrden, int id_producto, LocalDateTime fechaOrden, String estadoOrden) {
         try {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setIdOrden(idOrden);
@@ -48,7 +49,7 @@ public class Detalle_OrdenControlador {
     }
 
     // Método para actualizar un Detalle de Orden existente
-    public void actualizarDetalleOrden(int idDetalleOrden, int idOrden, int id_producto, java.sql.Date fechaOrden, String estadoOrden) {
+    public void actualizarDetalleOrden(int idDetalleOrden, int idOrden, int id_producto, LocalDateTime fechaOrden, String estadoOrden) {
         try {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setId_detalle_orden(idDetalleOrden);
@@ -77,10 +78,9 @@ public class Detalle_OrdenControlador {
     public static void main(String[] args) {
         Detalle_OrdenControlador controlador = new Detalle_OrdenControlador();
 
-        java.sql.Date fecha = java.sql.Date.valueOf("2025-04-15"); // Fecha para prueba
 
         // Crear un detalle de orden
-        controlador.crearDetalleOrden(1, 1, fecha, "Entregado");
+        controlador.crearDetalleOrden(1, 1, LocalDateTime.of(2025, 4, 29, 10, 0), "Entregado");
 
         // Leer todos los detalles de orden
         List<Detalle_Orden> detalles = controlador.obtenerTodosDetalleOrden();
@@ -96,7 +96,7 @@ public class Detalle_OrdenControlador {
         }
 
         // Actualizar un detalle de orden (asumiendo que ID 1 existe)
-        controlador.actualizarDetalleOrden(1, 1, 2, fecha, "En preparación");
+        controlador.actualizarDetalleOrden(1, 1, 2, LocalDateTime.of(2025, 5, 1, 12, 0), "En preparación");
 
         // Eliminar un detalle de orden
         controlador.eliminarDetalleOrden(1);
