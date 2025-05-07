@@ -286,9 +286,9 @@ public class VistaProductos extends javax.swing.JPanel {
 
         if (!nombre_producto.isEmpty() && !precio_costoStr.isEmpty() && !precio_ventaStr.isEmpty() && !existenciaStr.isEmpty()) {
             try {
-                float precio_costo = Float.parseFloat(precio_costoStr);
-                float precio_venta = Float.parseFloat(precio_ventaStr);
-                int existencia = Integer.parseInt(existenciaStr);
+                float precio_costo = Float.parseFloat(precio_costoStr.trim().replace(",", "."));
+                float precio_venta = Float.parseFloat(precio_ventaStr.trim().replace(",", "."));
+                int existencia = Integer.parseInt(existenciaStr.trim());
 
                 ProductoControlador controlador = new ProductoControlador();
                 controlador.crearProducto(nombre_producto, precio_costo, precio_venta, existencia);
