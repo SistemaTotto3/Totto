@@ -65,9 +65,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="nombre_producto" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="textnombre_producto" min="-2" pref="160" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="precio_costo" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="textprecio_costo" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jlabel1" min="-2" pref="160" max="-2" attributes="0"/>
@@ -77,20 +77,18 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="precio_venta" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textprecio_venta" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="existencia" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textexistencia" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="BuscarProducto" min="-2" pref="353" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                                  <Component id="Guardar" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="473" max="-2" attributes="0"/>
+                                  <Component id="btnGuardar" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
@@ -100,12 +98,12 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-                  <Component id="Buscar" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="Eliminar" min="-2" pref="119" max="-2" attributes="0"/>
+                  <Component id="textBuscarProducto" min="-2" pref="353" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnEliminar" min="-2" pref="119" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                  <Component id="Actualizar" min="-2" pref="119" max="-2" attributes="0"/>
+                  <Component id="btnActualizar" min="-2" pref="119" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -123,30 +121,21 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="precio_costo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="precio_venta" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="existencia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textprecio_costo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textprecio_venta" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textexistencia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="nombre_producto" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="textnombre_producto" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="BuscarProducto" min="-2" pref="31" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Buscar" min="-2" pref="31" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="Guardar" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Actualizar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="Eliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                  <Component id="btnGuardar" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnActualizar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnEliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="textBuscarProducto" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" pref="223" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -158,9 +147,9 @@
             <Property name="text" type="java.lang.String" value="nombre_producto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nombre_producto">
+        <Component class="javax.swing.JTextField" name="textnombre_producto">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombre_productoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textnombre_productoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlabel2">
@@ -168,9 +157,9 @@
             <Property name="text" type="java.lang.String" value="precio_costo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="precio_costo">
+        <Component class="javax.swing.JTextField" name="textprecio_costo">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precio_costoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textprecio_costoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -178,9 +167,9 @@
             <Property name="text" type="java.lang.String" value="precio_venta"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="precio_venta">
+        <Component class="javax.swing.JTextField" name="textprecio_venta">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precio_ventaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textprecio_ventaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -188,46 +177,38 @@
             <Property name="text" type="java.lang.String" value="existencia"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="existencia">
+        <Component class="javax.swing.JTextField" name="textexistencia">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="existenciaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textexistenciaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Guardar">
+        <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GuardarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnGuardar"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Buscar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Buscar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="Eliminar">
+        <Component class="javax.swing.JButton" name="btnEliminar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnEliminar"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Actualizar">
+        <Component class="javax.swing.JButton" name="btnActualizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ActualizarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="BuscarProducto">
+        <Component class="javax.swing.JTextField" name="textBuscarProducto">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarProductoActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textBuscarProductoKeyTyped"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -237,17 +218,21 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable2">
+            <Component class="javax.swing.JTable" name="tablaProducto">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  <Table columnCount="5" rowCount="5">
+                    <Column editable="false" title="id_producto" type="java.lang.Object"/>
+                    <Column editable="false" title="nombre_producto" type="java.lang.Object"/>
+                    <Column editable="false" title="precio_costo" type="java.lang.Object"/>
+                    <Column editable="false" title="precio_venta" type="java.lang.Object"/>
+                    <Column editable="false" title="existencia" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaProductosMouseCliked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
