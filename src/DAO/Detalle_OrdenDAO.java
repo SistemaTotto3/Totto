@@ -7,12 +7,12 @@ package DAO;
 import Modelo.Detalle_Orden;
 import Util.ConexionDB;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -32,7 +32,7 @@ public class Detalle_OrdenDAO {
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdOrden());
             stmt.setInt(2, detalle.getId_producto());
-            stmt.setDate(3, new java.sql.Date(detalle.getFecha_orden().getTime()));
+            stmt.setTimestamp(3,java.sql.Timestamp.valueOf(detalle.getFecha_orden()));
             stmt.setString(4, detalle.getEstado_orden());
             stmt.executeUpdate();
         }
@@ -48,7 +48,7 @@ public class Detalle_OrdenDAO {
                 detalle.setId_detalle_orden(rs.getInt("id_detalle_orden"));
                 detalle.setIdOrden(rs.getInt("idOrden"));
                 detalle.setId_producto(rs.getInt("id_producto"));
-                detalle.setFecha_orden(rs.getDate("fecha_orden"));
+                detalle.setFecha_orden(rs.getObject("fecha_orden", LocalDateTime.class));
                 detalle.setEstado_orden(rs.getString("estado_orden"));
                 detalles.add(detalle);
             }
@@ -62,7 +62,7 @@ public class Detalle_OrdenDAO {
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdOrden());
             stmt.setInt(2, detalle.getId_producto());
-            stmt.setDate(3, new java.sql.Date(detalle.getFecha_orden().getTime()));
+            stmt.setTimestamp(3, java.sql.Timestamp.valueOf(detalle.getFecha_orden()));
             stmt.setString(4, detalle.getEstado_orden());
             stmt.setInt(5, detalle.getId_detalle_orden());
             stmt.executeUpdate();
@@ -89,8 +89,7 @@ public class Detalle_OrdenDAO {
             detalle.setId_detalle_orden(1); // ID existente
             detalle.setIdOrden(2);
             detalle.setId_producto(3);
-            detalle.setFecha_orden(new java.util.Date());
-            
+            detalle.setFecha_orden(LocalDateTime.now());
             detalle.setEstado_orden("Activa");
             dao.actualizarDetalleOrden(detalle);
             System.out.println("Detalle_Orden actualizado.");

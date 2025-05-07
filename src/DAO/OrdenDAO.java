@@ -8,8 +8,8 @@ import Util.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -23,7 +23,7 @@ public class OrdenDAO {
         String sql = "INSERT INTO Orden (id_cuenta, fecha_orden) VALUES (?, ?)";
         try (Connection conn = ConexionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, orden.getId_cuenta());
-            stmt.setTimestamp(3, new java.sql.Timestamp(orden.getFecha_orden().getTime()));
+            stmt.setTimestamp(2,java.sql.Timestamp.valueOf(orden.getFecha_orden()));
             stmt.executeUpdate();
         }
     }
@@ -37,7 +37,7 @@ public class OrdenDAO {
                 Orden orden = new Orden();
                 orden.setIdOrden(rs.getInt("idOrden"));
                 orden.setId_cuenta(rs.getInt("id_cuenta"));
-                orden.setFecha_orden(rs.getTimestamp("fecha_orden"));
+                orden.setFecha_orden(rs.getObject("fecha_orden", LocalDateTime.class));
                 ordenes.add(orden);
             }
         }
@@ -49,7 +49,7 @@ public class OrdenDAO {
         String sql = "UPDATE Orden SET id_cuenta = ?, fecha_orden = ? WHERE idOrden = ?";
         try (Connection conn = ConexionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, orden.getId_cuenta());
-            stmt.setTimestamp(2, new java.sql.Timestamp(orden.getFecha_orden().getTime()));
+            stmt.setTimestamp(2, java.sql.Timestamp.valueOf(orden.getFecha_orden()));
             stmt.setInt(3, orden.getIdOrden());
             stmt.executeUpdate();
         }
@@ -71,7 +71,7 @@ public class OrdenDAO {
             Orden orden = new Orden();
             orden.setIdOrden(1); // ID existente
             orden.setId_cuenta(1);
-            orden.setFecha_orden(new Date());
+            orden.setFecha_orden(LocalDateTime.now());
             dao.actualizarOrden(orden);
             System.out.println("Orden actualizada.");
             List<Orden> ordenes = dao.obtenerOrdenes();

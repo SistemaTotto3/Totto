@@ -4,8 +4,9 @@
  */
 package Modelo;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Date;
+
 
 /**
  *
@@ -15,12 +16,12 @@ public class Orden {
 
     private int idOrden;
     private int id_cuenta; //Relacion con cuenta
-    private Date fecha_orden;
+    private LocalDateTime fecha_orden;
     private List<Detalle_Orden> detalle;
 
-    public Orden(int id_orden, int idCuenta, Date fecha_orden, List<Detalle_Orden> detalle) {
-        this.idOrden = id_orden;
-        this.id_cuenta = idCuenta;
+    public Orden(int idOrden, int id_cuenta, LocalDateTime fecha_orden, List<Detalle_Orden> detalle) {
+        this.idOrden = idOrden;
+        this.id_cuenta = id_cuenta;
         this.fecha_orden = fecha_orden;
         this.detalle = detalle;
     }
@@ -28,7 +29,6 @@ public class Orden {
     public Orden() {
     }
 
-    
     public int getIdOrden() {
         return idOrden;
     }
@@ -45,11 +45,11 @@ public class Orden {
         this.id_cuenta = id_cuenta;
     }
 
-    public Date getFecha_orden() {
+    public LocalDateTime getFecha_orden() {
         return fecha_orden;
     }
 
-    public void setFecha_orden(Date fecha_orden) {
+    public void setFecha_orden(LocalDateTime fecha_orden) {
         this.fecha_orden = fecha_orden;
     }
 
@@ -60,10 +60,5 @@ public class Orden {
     public void setDetalle(List<Detalle_Orden> detalle) {
         this.detalle = detalle;
     }
-
-    
-    public java.sql.Date getFechaOrden() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+  
 }
