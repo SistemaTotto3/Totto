@@ -39,9 +39,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="nombre_1" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="textnombre_1" min="-2" pref="160" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="apellido_1" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="textapellido_1" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jlabel1" min="-2" pref="160" max="-2" attributes="0"/>
@@ -51,20 +51,20 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="dirrecion_cliente" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textdireccion_cliente" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="telefono_cliente" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="texttelefono_cliente" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="BuscarCliente" min="-2" pref="353" max="-2" attributes="0"/>
+                                  <Component id="textBuscarCliente" min="-2" pref="353" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="Guardar" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnGuardar" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
                           <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                           <Component id="Buscar" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="Eliminar" min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="btnEliminar" min="-2" pref="119" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="Actualizar" min="-2" pref="119" max="-2" attributes="0"/>
                       </Group>
@@ -98,26 +98,26 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="apellido_1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="dirrecion_cliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="telefono_cliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textapellido_1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textdireccion_cliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="texttelefono_cliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="nombre_1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="textnombre_1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="BuscarCliente" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="textBuscarCliente" min="-2" pref="31" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="Buscar" min="-2" pref="31" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Guardar" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Actualizar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="Eliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="btnEliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -139,24 +139,24 @@
             <Property name="text" type="java.lang.String" value="apellido_1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nombre_1">
+        <Component class="javax.swing.JTextField" name="textnombre_1">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombre_1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textnombre_1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="apellido_1">
+        <Component class="javax.swing.JTextField" name="textapellido_1">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apellido_1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textapellido_1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="dirrecion_cliente">
+        <Component class="javax.swing.JTextField" name="textdireccion_cliente">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dirrecion_clienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textdireccion_clienteActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="dirrecion_cliente"/>
+            <Property name="text" type="java.lang.String" value="direccion_cliente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -164,17 +164,17 @@
             <Property name="text" type="java.lang.String" value="telefono_cliente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="telefono_cliente">
+        <Component class="javax.swing.JTextField" name="texttelefono_cliente">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefono_clienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="texttelefono_clienteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Guardar">
+        <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GuardarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnGuardar"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Actualizar">
@@ -182,20 +182,21 @@
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ActualizarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnActualizar"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Eliminar">
+        <Component class="javax.swing.JButton" name="btnEliminar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnbtnEliminar"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="BuscarCliente">
+        <Component class="javax.swing.JTextField" name="textBuscarCliente">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBuscarClienteActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textBuscarClienteKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Buscar">
@@ -213,17 +214,21 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable2">
+            <Component class="javax.swing.JTable" name="tablaCliente">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  <Table columnCount="5" rowCount="5">
+                    <Column editable="false" title="idCliente" type="java.lang.Object"/>
+                    <Column editable="false" title="nombre_1" type="java.lang.Object"/>
+                    <Column editable="false" title="apellido_1" type="java.lang.Object"/>
+                    <Column editable="false" title="direccion_cliente" type="java.lang.Object"/>
+                    <Column editable="false" title="telefono_cliente" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaClienteMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
