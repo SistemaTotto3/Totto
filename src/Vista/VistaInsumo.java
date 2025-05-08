@@ -113,9 +113,16 @@ public class VistaInsumo extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tablainsumo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,14 +246,14 @@ public class VistaInsumo extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        String nombre = textNombreInsumo.getText();
-        String precio = textPrecioInsumo.getText();
+        String nombre_insumo = textNombreInsumo.getText();
+        String precio_insumoStr = textPrecioInsumo.getText();
 
-        if (idInsumoSeleccionado != null && !nombre.isEmpty() && !precio.isEmpty()) {
-            float precioFloat = Float.parseFloat(precio);
-            insumoControlador.actualizarInsumo(idInsumoSeleccionado, nombre, precioFloat);
+        if (idInsumoSeleccionado != null && !nombre_insumo.isEmpty() && !precio_insumoStr.isEmpty()) {
+          try {
+            float precio_insumo = Float.parseFloat(precio_insumoStr);
             
-            insumoControlador.actualizarInsumo(idInsumoSeleccionado, nombre, precioFloat);
+            insumoControlador.actualizarInsumo(idInsumoSeleccionado, nombre_insumo, precio_insumo);
             cargarDatosTabla();
 
             textNombreInsumo.setText("");
@@ -255,6 +262,11 @@ public class VistaInsumo extends javax.swing.JPanel {
 
             btnEliminar.setEnabled(true);
             btnGuardar.setEnabled(true);
+            
+            } catch (NumberFormatException e) {
+                // Si ocurre un error al convertir los números, mostramos un mensaje de error
+                javax.swing.JOptionPane.showMessageDialog(this, ", precio insumo debe ser valor numérico.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
@@ -265,12 +277,12 @@ public class VistaInsumo extends javax.swing.JPanel {
          if (evt.getClickCount()== 2) {
             int filaSeleccionada = tablainsumo.getSelectedRow();
             if (filaSeleccionada != -1) {
-                int idInsumoSeleccionado= (int) tablainsumo.getValueAt(filaSeleccionada, 0);
+                idInsumoSeleccionado= (int) tablainsumo.getValueAt(filaSeleccionada, 0);
                 String nombre = (String) tablainsumo.getValueAt(filaSeleccionada, 1);
-                String descripcion = (String) tablainsumo.getValueAt(filaSeleccionada, 2);
+                Float precio_insumo = (Float) tablainsumo.getValueAt(filaSeleccionada, 2);
                 
                 textNombreInsumo.setText(nombre);
-                textPrecioInsumo.setText(descripcion);
+                textPrecioInsumo.setText(String.valueOf(precio_insumo));
                 
                 btnEliminar.setEnabled(false);
                 btnGuardar.setEnabled(false);

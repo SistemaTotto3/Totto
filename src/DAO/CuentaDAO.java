@@ -98,7 +98,7 @@ public class CuentaDAO {
             dao.actualizarCuenta(cuenta);
             System.out.println("Cuenta actualizada.");
             List<Cuenta> cuentas = dao. leerTodasCuenta();
-            System.out.println("Lista de ventas:");
+            System.out.println("Lista de cuentas:");
             for (Cuenta cuen : cuentas) {
                 System.out.println("Cuenta ID: " + cuen.getId_cuenta()
                         + ", Orden ID: " + cuen.getIdOrden()
