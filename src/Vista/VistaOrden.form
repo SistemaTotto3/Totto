@@ -29,7 +29,7 @@
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="BuscarCliente" min="-2" pref="353" max="-2" attributes="0"/>
+                      <Component id="BuscarOrden" min="-2" pref="353" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Buscar" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
@@ -74,7 +74,7 @@
               <Component id="btnEliminar" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace pref="56" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BuscarCliente" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="BuscarOrden" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="Buscar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -98,7 +98,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textfecha_orden">
     </Component>
-    <Component class="javax.swing.JTextField" name="BuscarCliente">
+    <Component class="javax.swing.JTextField" name="BuscarOrden">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textBuscarKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textid_cuenta">
     </Component>

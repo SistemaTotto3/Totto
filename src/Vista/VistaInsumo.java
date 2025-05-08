@@ -3,19 +3,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
-
+import Controlador.InsumoControlador;
+import Modelo.Insumo;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author HP 17-CN0
  */
 public class VistaInsumo extends javax.swing.JPanel {
-
+   private final InsumoControlador insumoControlador;
+    private Integer idInsumoSeleccionado = null;
     /**
      * Creates new form VistaInsumo
      */
     public VistaInsumo() {
         initComponents();
+         this.insumoControlador = new InsumoControlador();
+        cargarDatosTabla();
     }
+    public void cargarDatosTabla() {
+        //Obtener todas las categorias del controlador
+        List<Insumo> insumos = insumoControlador.obtenerTodosInsumos();
+        if (insumos != null) {
+            // obtener el modelo existente de la tabla
+            DefaultTableModel model = (DefaultTableModel) tablainsumo.getModel();
+            model.setRowCount(0);
+            //llenar las filas con los datos de categorias  
+            for (Insumo ins : insumos) {
+                Object[] row = {
+                    ins.getId_insumo(),
+                    ins.getNombre_insumo(),
+                    ins.getPrecio_insumo()
+                };
+                model.addRow(row);
+            }
+        }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +60,7 @@ public class VistaInsumo extends javax.swing.JPanel {
         btnActualizar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablainsumo = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
@@ -62,7 +86,18 @@ public class VistaInsumo extends javax.swing.JPanel {
             }
         });
 
+        textBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textbuscarKeyTyped(evt);
+            }
+        });
+
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         tablainsumo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,9 +118,19 @@ public class VistaInsumo extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tablainsumo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablainsumoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablainsumo);
 
-        jButton1.setText("Guardar");
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnGuardar(evt);
+            }
+        });
 
         jButton2.setText("Buscar");
 
@@ -100,9 +145,9 @@ public class VistaInsumo extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(45, 45, 45)
                         .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(43, 43, 43)
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -116,7 +161,7 @@ public class VistaInsumo extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))))
                 .addGap(265, 265, 265))
         );
@@ -127,7 +172,7 @@ public class VistaInsumo extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textNombreInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textPrecioInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,10 +180,10 @@ public class VistaInsumo extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -164,13 +209,104 @@ public class VistaInsumo extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        int filaSeleccionada = tablainsumo.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int idInsumo = (int) tablainsumo.getValueAt(filaSeleccionada, 0);
+            insumoControlador.eliminarInsumo(idInsumo);
+            cargarDatosTabla();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una fila para eleiminar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE); 
+        }  
+    
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void accionbtnGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnGuardar
+         String nombre = textNombreInsumo.getText();
+        String precioText = textPrecioInsumo.getText();
+
+        if (!nombre.isEmpty() && !precioText.isEmpty()) {
+            Float precio = Float.parseFloat(precioText);
+            insumoControlador.crearInsumo(nombre, precio);
+            cargarDatosTabla();
+            textNombreInsumo.setText("");
+            textPrecioInsumo.setText("");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos,", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+               
+ 
+    }//GEN-LAST:event_accionbtnGuardar
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        String nombre = textNombreInsumo.getText();
+        String precio = textPrecioInsumo.getText();
+
+        if (idInsumoSeleccionado != null && !nombre.isEmpty() && !precio.isEmpty()) {
+            float precioFloat = Float.parseFloat(precio);
+            insumoControlador.actualizarInsumo(idInsumoSeleccionado, nombre, precioFloat);
+            
+            insumoControlador.actualizarInsumo(idInsumoSeleccionado, nombre, precioFloat);
+            cargarDatosTabla();
+
+            textNombreInsumo.setText("");
+            textPrecioInsumo.setText("");
+            idInsumoSeleccionado = null;
+
+            btnEliminar.setEnabled(true);
+            btnGuardar.setEnabled(true);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void tablainsumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablainsumoMouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount()== 2) {
+            int filaSeleccionada = tablainsumo.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                int idInsumoSeleccionado= (int) tablainsumo.getValueAt(filaSeleccionada, 0);
+                String nombre = (String) tablainsumo.getValueAt(filaSeleccionada, 1);
+                String descripcion = (String) tablainsumo.getValueAt(filaSeleccionada, 2);
+                
+                textNombreInsumo.setText(nombre);
+                textPrecioInsumo.setText(descripcion);
+                
+                btnEliminar.setEnabled(false);
+                btnGuardar.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_tablainsumoMouseClicked
+
+    private void textbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textbuscarKeyTyped
+        // TODO add your handling code here:
+         String textoBusqueda = textBuscar.getText().trim().toLowerCase();
+        List<Insumo> insumos = insumoControlador.obtenerTodosInsumos();
+
+        DefaultTableModel modelo = (DefaultTableModel) tablainsumo.getModel();
+        modelo.setRowCount(0);
+
+        if (insumos != null) {
+            for (Insumo cat : insumos) {
+                if (textoBusqueda.isEmpty()||
+                    cat.getNombre_insumo().toLowerCase().contains(textoBusqueda) || 
+                    String.valueOf(cat.getPrecio_insumo()).contains(textoBusqueda)) { 
+                    Object[] fila = {
+                        cat.getId_insumo(),
+                        cat.getNombre_insumo(),
+                        cat.getPrecio_insumo()
+                    };
+                    modelo.addRow(fila);
+                }
+            }
+        }
+    }//GEN-LAST:event_textbuscarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

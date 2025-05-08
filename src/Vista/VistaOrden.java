@@ -63,7 +63,7 @@ public class VistaOrden extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         textfecha_orden = new javax.swing.JTextField();
-        BuscarCliente = new javax.swing.JTextField();
+        BuscarOrden = new javax.swing.JTextField();
         textid_cuenta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         Buscar = new javax.swing.JButton();
@@ -78,6 +78,12 @@ public class VistaOrden extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("id_cuenta ");
+
+        BuscarOrden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textBuscarKeyTyped(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,7 +145,7 @@ public class VistaOrden extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BuscarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -174,7 +180,7 @@ public class VistaOrden extends javax.swing.JPanel {
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BuscarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +196,7 @@ public class VistaOrden extends javax.swing.JPanel {
         if (!id_cuentaStr.trim().isEmpty() && !fecha_ordenStr.trim().isEmpty()) {
             try {
                 int id_cuenta = Integer.parseInt(id_cuentaStr.trim());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
                 LocalDateTime fecha_orden = LocalDateTime.parse(fecha_ordenStr.trim(), formatter);
 
                 ordenControlador.crearOrden(id_cuenta, fecha_orden);
@@ -271,11 +277,46 @@ if (idOrdenSeleccionada != null && !id_cuenta.isEmpty() && !fecha_orden.isEmpty(
 
     }//GEN-LAST:event_accionbtnbtnEliminar
 
+    private void textBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBuscarKeyTyped
+        // TODO add your handling code here:
+        String textoBusqueda = BuscarOrden.getText().trim().toLowerCase();
+List<Orden> ordenes = ordenControlador.obtenerTodasOrdenes();
+
+DefaultTableModel modelo = (DefaultTableModel) tablaOrden.getModel();
+modelo.setRowCount(0);
+
+if (ordenes != null) {
+    for (Orden ord : ordenes) {
+        try {
+            String idOrden = String.valueOf(ord.getIdOrden()).toLowerCase();
+            String idCuenta = String.valueOf(ord.getId_cuenta()).toLowerCase();
+            String fechaOrden = ord.getFecha_orden() != null ? ord.getFecha_orden().toString().toLowerCase() : "";
+
+            if (textoBusqueda.isEmpty() ||
+                idOrden.contains(textoBusqueda) ||
+                idCuenta.contains(textoBusqueda) ||
+                fechaOrden.contains(textoBusqueda)) {
+
+                Object[] fila = {
+                    ord.getIdOrden(),
+                    ord.getId_cuenta(),
+                    ord.getFecha_orden()
+                };
+                modelo.addRow(fila);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error al procesar la orden: " + e.getMessage());
+        }
+    }
+}
+
+    }//GEN-LAST:event_textBuscarKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
     private javax.swing.JButton Buscar;
-    private javax.swing.JTextField BuscarCliente;
+    private javax.swing.JTextField BuscarOrden;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
