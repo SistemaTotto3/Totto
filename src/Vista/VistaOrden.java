@@ -3,19 +3,54 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
+import Controlador.OrdenControlador;
+import Modelo.Orden;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Hassel
  */
+
 public class VistaOrden extends javax.swing.JPanel {
+     private final OrdenControlador ordenControlador;
+    private Integer idOrdenSeleccionada = null;
+
 
     /**
      * Creates new form VistaOrden
      */
     public VistaOrden() {
         initComponents();
+         this.ordenControlador = new OrdenControlador();
+        cargarDatosTabla();
     }
+    
+    private void cargarDatosTabla() {
+        // Obtener todas las categorias del controlador
+        List<Orden> ordenes = ordenControlador.obtenerTodasOrdenes();
+
+        if (ordenes != null) {
+            //Obtener el modelo existente de la tabla 
+            DefaultTableModel model = (DefaultTableModel) tablaOrden.getModel();
+            //Limpiar las filas existentes 
+            model.setRowCount(0);
+
+            //Llenar las filas con los datos categorias
+            for (Orden ord : ordenes) {
+                Object[] row = {
+                    ord.getIdOrden(),
+                    ord.getId_cuenta(),
+                    ord.getFecha_orden()
+                };
+                model.addRow(row);
+            }
+        }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,79 +62,65 @@ public class VistaOrden extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        fecha_orden = new javax.swing.JTextField();
+        textfecha_orden = new javax.swing.JTextField();
         BuscarCliente = new javax.swing.JTextField();
-        id_cuenta = new javax.swing.JTextField();
+        textid_cuenta = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         Buscar = new javax.swing.JButton();
-        Guardar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         Actualizar = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaOrden = new javax.swing.JTable();
 
         jLabel1.setText("id_cuenta ");
-
-        fecha_orden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fecha_ordenActionPerformed(evt);
-            }
-        });
-
-        BuscarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarClienteActionPerformed(evt);
-            }
-        });
-
-        id_cuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_cuentaActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("fecha_orden");
 
         Buscar.setText("Buscar");
-        Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarActionPerformed(evt);
-            }
-        });
 
-        Guardar.setText("Guardar");
-        Guardar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarActionPerformed(evt);
+                accionbtnbtnGuardar(evt);
             }
         });
 
         Actualizar.setText("Actualizar");
         Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ActualizarActionPerformed(evt);
+                accionbtnActualizar(evt);
             }
         });
 
-        Eliminar.setText("Eliminar");
-        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarActionPerformed(evt);
+                accionbtnbtnEliminar(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "id_cuenta", "fecha_orden"
+                "idOrden", "id_cuenta", "fecha_orden"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaOrden);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,14 +137,14 @@ public class VistaOrden extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(id_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(textid_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(jLabel1)
                                                 .addGap(139, 139, 139)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel2)
-                                            .addComponent(fecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(textfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(140, 140, 140)
                                 .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -132,8 +153,8 @@ public class VistaOrden extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 100, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -147,63 +168,124 @@ public class VistaOrden extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(id_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textid_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fecha_ordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecha_ordenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fecha_ordenActionPerformed
+    private void accionbtnbtnGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnbtnGuardar
+        // TODO add your handling code here:     
+        String id_cuentaStr = textid_cuenta.getText();
+        String fecha_ordenStr = textfecha_orden.getText();
 
-    private void BuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarClienteActionPerformed
+        if (!id_cuentaStr.trim().isEmpty() && !fecha_ordenStr.trim().isEmpty()) {
+            try {
+                int id_cuenta = Integer.parseInt(id_cuentaStr.trim());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime fecha_orden = LocalDateTime.parse(fecha_ordenStr.trim(), formatter);
 
-    private void id_cuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_cuentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_id_cuentaActionPerformed
+                ordenControlador.crearOrden(id_cuenta, fecha_orden);
+                cargarDatosTabla();
+                textid_cuenta.setText("");
+                textfecha_orden.setText("");
+                javax.swing.JOptionPane.showMessageDialog(this, "Orden guardada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar la orden: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    
 
-    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarActionPerformed
+    }//GEN-LAST:event_accionbtnbtnGuardar
 
-    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardarActionPerformed
+    private void accionbtnActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnActualizar
+        String id_cuenta = textid_cuenta.getText();
+String fecha_orden = textfecha_orden.getText();
 
-    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ActualizarActionPerformed
+if (idOrdenSeleccionada != null && !id_cuenta.isEmpty() && !fecha_orden.isEmpty()) { 
+    try {
+        int id_cuentaInt = Integer.parseInt(id_cuenta.trim());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime fechaOrdenDateTime = LocalDateTime.parse(fecha_orden.trim(), formatter);
 
-    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        ordenControlador.actualizarOrden(idOrdenSeleccionada, id_cuentaInt, fechaOrdenDateTime);
+        cargarDatosTabla();
+
+        textid_cuenta.setText("");
+        textfecha_orden.setText("");
+        idOrdenSeleccionada = null;
+
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(true);
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Orden actualizada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar la orden: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+} else {
+    javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+}
+
+
+    }//GEN-LAST:event_accionbtnActualizar
+
+    private void accionbtnbtnEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnbtnEliminar
         // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarActionPerformed
+         int filaSeleccionada = tablaOrden.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int idOrden= (int) tablaOrden.getValueAt(filaSeleccionada, 0);
+            ordenControlador.eliminarOrden(idOrden);
+            cargarDatosTabla();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una fila para eleiminar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE); 
+        }  
+    }    
+
+
+    private void tablaOrdenMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        // TODO add your handling code here:
+          if (evt.getClickCount()== 2) {
+            int filaSeleccionada = tablaOrden.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                int idOrdenSeleccionada = (Integer) tablaOrden.getValueAt(filaSeleccionada, 0);
+                int id_cuenta = (Integer) tablaOrden.getValueAt(filaSeleccionada, 1);
+                LocalDateTime fecha_orden = (LocalDateTime) tablaOrden.getValueAt(filaSeleccionada, 2);
+                
+                textid_cuenta.setText(String.valueOf(id_cuenta));
+                textfecha_orden.setText(String.valueOf(fecha_orden));
+                
+                btnEliminar.setEnabled(false);
+                btnGuardar.setEnabled(false);
+            }
+        } 
+
+    }//GEN-LAST:event_accionbtnbtnEliminar
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
     private javax.swing.JButton Buscar;
     private javax.swing.JTextField BuscarCliente;
-    private javax.swing.JButton Eliminar;
-    private javax.swing.JButton Guardar;
-    private javax.swing.JTextField fecha_orden;
-    private javax.swing.JTextField id_cuenta;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tablaOrden;
+    private javax.swing.JTextField textfecha_orden;
+    private javax.swing.JTextField textid_cuenta;
     // End of variables declaration//GEN-END:variables
 }
