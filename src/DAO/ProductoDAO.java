@@ -25,14 +25,16 @@ public class ProductoDAO {
             nombre_producto, 
             precio_costo, 
             precio_venta,
-            existencia
-        ) VALUES (?, ?, ?, ?)""";
+            existencia,
+            id_categoria
+        ) VALUES (?, ?, ?, ?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre_producto());
             stmt.setFloat(2, producto.getPrecio_costo());
             stmt.setFloat(3, producto.getPrecio_venta());
             stmt.setInt(4, producto.getExistencia());
+            stmt.setInt(5, producto.getId_categoria());
             stmt.executeUpdate();
         }
     }
@@ -49,6 +51,7 @@ public class ProductoDAO {
                 producto.setPrecio_costo(rs.getFloat("precio_costo"));
                 producto.setPrecio_venta(rs.getFloat("id_categoria"));
                 producto.setExistencia(rs.getInt("existencia"));
+                producto.setId_categoria(rs.getInt("id_categoria"));
                 productos.add(producto);
             }
         }
@@ -59,14 +62,15 @@ public class ProductoDAO {
 // Método para actualizar un producto
 
     public void actualizarProducto(Producto producto) throws SQLException {
-        String sql = "UPDATE Producto SET nombre_producto = ?, precio_costo = ?, precio_venta = ?,existencia = ? WHERE id_producto = ?";
+String sql = "UPDATE Producto SET nombre_producto = ?, precio_costo = ?, precio_venta = ?, existencia = ?, id_categoria = ? WHERE id_producto = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setString(1, producto.getNombre_producto());
             stmt.setFloat(2, producto.getPrecio_costo());
             stmt.setFloat(3, producto.getPrecio_venta());
             stmt.setInt(4, producto.getExistencia());
-            stmt.setInt(5, producto.getId_producto());
+            stmt.setInt(5, producto.getId_categoria());
+            stmt.setInt(6, producto.getId_producto());
             stmt.executeUpdate();
         }
     }
@@ -93,6 +97,7 @@ public class ProductoDAO {
             producto.setPrecio_costo(30);
             producto.setPrecio_venta(90);
             producto.setExistencia(1);
+            producto.setId_categoria(1);
             dao.actualizarProducto(producto);
             System.out.println("Producto actualizado.");
 
@@ -103,7 +108,7 @@ public class ProductoDAO {
                 System.out.println("ID: " + prod.getId_producto()
                         + ", Nombre: " + prod.getNombre_producto()
                         + ", precio_costo: " + prod.getPrecio_costo()
-                        + ", precio_venta: " + prod.getPrecio_venta()+ ", existencia: " + prod.getExistencia());
+                        + ", precio_venta: " + prod.getPrecio_venta()+ ", existencia: " + prod.getExistencia()+ ", id_categoria: " +prod.getId_categoria());
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());

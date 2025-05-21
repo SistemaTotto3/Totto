@@ -15,13 +15,15 @@ public class Producto {
     private float precio_costo;
     private float precio_venta;
     private int existencia;
+    private int id_categoria;
 
-    public Producto(int id_producto, String nombre_producto, float precio_costo, float precio_venta, int existencia) {
+    public Producto(int id_producto, String nombre_producto, float precio_costo, float precio_venta, int existencia, int id_categoria) {
         this.id_producto = id_producto;
         this.nombre_producto = nombre_producto;
         this.precio_costo = precio_costo;
         this.precio_venta = precio_venta;
         this.existencia = existencia;
+        this.id_categoria = id_categoria;
     }
 
     public Producto() {
@@ -66,4 +68,13 @@ public class Producto {
     public void setExistencia(int existencia) {
         this.existencia = existencia;
     }
+
+    public int getId_categoria() {
+        return id_categoria;
+    }
+
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
+    }
+
 }

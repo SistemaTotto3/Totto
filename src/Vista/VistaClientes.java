@@ -26,6 +26,16 @@ public class VistaClientes extends javax.swing.JPanel {
         cargarDatosTabla();
     }
     
+    private void limpiar() {
+        textnombre_1.setText("");
+        textapellido_1.setText("");
+        textdireccion_cliente.setText("");
+        texttelefono_cliente.setText("");
+        textBuscarCliente.setText("");
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(true);
+    }
+    
      public void cargarDatosTabla() {
         //Obtener todas las categorias del controlador
         List<Cliente> clientes = clienteControlador.obtenerTodosClientes();
@@ -71,6 +81,7 @@ public class VistaClientes extends javax.swing.JPanel {
         Buscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCliente = new javax.swing.JTable();
+        btnLimpiar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
         jPanel1.setForeground(new java.awt.Color(0, 51, 102));
@@ -181,6 +192,13 @@ public class VistaClientes extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tablaCliente);
 
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnLimpiarCliente(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -190,11 +208,6 @@ public class VistaClientes extends javax.swing.JPanel {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(textBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -223,8 +236,15 @@ public class VistaClientes extends javax.swing.JPanel {
                                                 .addComponent(textdireccion_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(107, 107, 107)
                                                 .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(texttelefono_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 278, Short.MAX_VALUE)))
+                                            .addComponent(texttelefono_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(textBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 173, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -252,7 +272,8 @@ public class VistaClientes extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
@@ -397,12 +418,24 @@ public class VistaClientes extends javax.swing.JPanel {
     }
     }//GEN-LAST:event_textBuscarClienteKeyTyped
 
+    private void accionbtnLimpiarCliente(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnLimpiarCliente
+        // TODO add your handling code here:
+        textnombre_1.setText("");
+        textapellido_1.setText("");
+        textdireccion_cliente.setText("");
+        texttelefono_cliente.setText("");
+        textBuscarCliente.setText("");
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(true);
+    }//GEN-LAST:event_accionbtnLimpiarCliente
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
