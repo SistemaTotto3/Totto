@@ -47,6 +47,14 @@ public class ProductoControlador {
             return null;
         }
     }
+    public Producto obtenerProductoPorId(int id_producto) {
+        try {
+            return productoDAO.obtenerProductoPorId(id_producto);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
 
     // Método para actualizar un producto existente
     public void actualizarProducto(int id_producto, String nombre_producto, float precio_costo, float precio_venta, int existencia, int id_categoria) {

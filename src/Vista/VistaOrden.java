@@ -3,12 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
+import Controlador.Detalle_OrdenControlador;
 import Controlador.OrdenControlador;
+import Controlador.ProductoControlador;
+import Modelo.Detalle_Orden;
 import Modelo.Orden;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import Modelo.Producto;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
+import java.util.TimeZone;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 
 /**
  *
@@ -16,40 +25,122 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class VistaOrden extends javax.swing.JPanel {
-     private final OrdenControlador ordenControlador;
-    private Integer idOrdenSeleccionada = null;
+    private final OrdenControlador ordenControlador;
+    private final Detalle_OrdenControlador detalleOrdenControlador;
+    private final ProductoControlador productoControlador;
+    private Integer idProductoSeleccionado = null;
+    private Timer timer;
+    private boolean horabd = false;
 
-
-    /**
-     * Creates new form VistaOrden
-     */
     public VistaOrden() {
         initComponents();
-         this.ordenControlador = new OrdenControlador();
-        cargarDatosTabla();
+        this.ordenControlador = new OrdenControlador();
+        this.detalleOrdenControlador = new Detalle_OrdenControlador();
+        this.productoControlador = new ProductoControlador();
+
+        // Inicialización general
+        selectorfecha_orden.setDate(new Date());
+        ((JTextField) selectorfecha_orden.getDateEditor().getUiComponent()).setEditable(false);
+        
+          comboEstado.addItem("Pendiente");
+          comboEstado.addItem("Entregado");
+          comboEstado.addItem("Cancelado");
+          
+        limpiar(); // Incluye la carga de combos y tablas
+        eventoComboProductos();
+        actualizarHora();
     }
-    
-    private void cargarDatosTabla() {
-        // Obtener todas las categorias del controlador
+
+    private void limpiar() {
+        selectorfecha_orden.setDate(new Date());
+        comboProductos.setSelectedIndex(0);
+        comboEstado.setSelectedIndex(0);
+        textcantidad.setText("");
+
+          // Limpiar la tabla de detalles
+        tablaDetalles.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"ID Producto", "Producto", "estado_orden", "Cantidad"}));
+
+
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        horabd = false;
+
+        cargarDatosTablaOrdenes();
+        cargarProductos();
+        actualizarHora();
+    }
+
+    private void actualizarHora() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("America/Managua"));
+
+        if (timer != null) {
+            timer.stop();
+        }
+
+        if (horabd) {
+            return;
+        }
+
+        timer = new Timer(1000, e -> {
+            Date now = new Date();
+            hora.setText(sdf.format(now));
+        });
+        timer.start();
+    }
+
+    private void cargarDatosTablaOrdenes() {
+    try {
         List<Orden> ordenes = ordenControlador.obtenerTodasOrdenes();
 
-        if (ordenes != null) {
-            //Obtener el modelo existente de la tabla 
-            DefaultTableModel model = (DefaultTableModel) tablaOrden.getModel();
-            //Limpiar las filas existentes 
-            model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tablaOrdenes.getModel();
+        model.setRowCount(0);
 
-            //Llenar las filas con los datos categorias
-            for (Orden ord : ordenes) {
+        if (ordenes != null) {
+            for (Orden o : ordenes) {
                 Object[] row = {
-                    ord.getIdOrden(),
-                    ord.getId_cuenta(),
-                    ord.getFecha_orden()
+                    o.getIdOrden(),
+                    o.getFecha_orden()
                 };
                 model.addRow(row);
             }
         }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar las órdenes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }
+
+    private void cargarProductos() {
+       try {
+            List<Producto> productos = productoControlador.obtenerTodosProductos();
+            comboProductos.removeAllItems();
+            comboProductos.addItem("Seleccione un producto");
+
+            for (Producto p : productos) {
+                comboProductos.addItem(p.getNombre_producto());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void eventoComboProductos() {
+        comboProductos.addActionListener(e -> {
+            int indiceSeleccionado = comboProductos.getSelectedIndex();
+            if (indiceSeleccionado <= 0) { // Skip "Seleccione un producto"
+                idProductoSeleccionado = null;
+                return;
+            }
+            try {
+                List<Producto> productos = productoControlador.obtenerTodosProductos();
+                Producto productoSeleccionado = productos.get(indiceSeleccionado - 1);
+                idProductoSeleccionado = productoSeleccionado.getId_producto();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al seleccionar producto: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
+
 
 
     /**
@@ -61,75 +152,33 @@ public class VistaOrden extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textfecha_orden = new javax.swing.JTextField();
-        BuscarOrden = new javax.swing.JTextField();
-        textid_cuenta = new javax.swing.JTextField();
-        Buscar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaOrden = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        btnGuardar = new javax.swing.JButton();
-        Actualizar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jlabel1 = new javax.swing.JLabel();
-        jlabel2 = new javax.swing.JLabel();
+        textBuscar = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        btnQuitarDetalle = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaOrdenes = new javax.swing.JTable();
+        hora = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnLimpiar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        comboProductos = new javax.swing.JComboBox<>();
+        btnGuardar = new javax.swing.JButton();
+        selectorfecha_orden = new com.toedter.calendar.JDateChooser();
+        textcantidad = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaDetalles = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        comboEstado = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 51, 102));
 
-        BuscarOrden.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                textBuscarKeyTyped(evt);
-            }
-        });
-
-        Buscar.setText("Buscar");
-
-        tablaOrden.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "idOrden", "id_cuenta", "fecha_orden"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tablaOrden);
-
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnbtnGuardar(evt);
-            }
-        });
-
-        Actualizar.setText("Actualizar");
-        Actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnActualizar(evt);
-            }
-        });
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnbtnEliminar(evt);
-            }
-        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logo pequeño.png"))); // NOI18N
 
@@ -140,233 +189,609 @@ public class VistaOrden extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/buscar (2).png"))); // NOI18N
+        textBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBuscarActionPerformed(evt);
+            }
+        });
+        textBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textBuscarKeyTyped(evt);
+            }
+        });
 
-        jlabel1.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
-        jlabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jlabel1.setText("ID Cuenta");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Buscar");
 
-        jlabel2.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
-        jlabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jlabel2.setText("Fecha Cuenta");
+        btnQuitarDetalle.setText("QuitarDetalles");
+        btnQuitarDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnQuitarDetalles(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText(" fecha");
+
+        tablaOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "IdOrden", "Fecha/Hora"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaOrdenes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaOrdenesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaOrdenes);
+
+        hora.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        hora.setForeground(new java.awt.Color(255, 255, 255));
+        hora.setText("00:00:00");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Producto");
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnLimpiar(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Estado Orden");
+
+        btnEliminar.setText("EliminarOrden");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnEliminar(evt);
+            }
+        });
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnAgregar(evt);
+            }
+        });
+
+        btnActualizar.setText("ActualizarOrden");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnActualizar(evt);
+            }
+        });
+
+        comboProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Producto 1", "Producto 2", "Producto 3", "Producto 4" }));
+
+        btnGuardar.setText("GuardaOrden");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardaraccionBotonGuardar(evt);
+            }
+        });
+
+        tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "id_Producto", "Producto", "Estado_Orden", "Cantidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaDetalles);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cantidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(BuscarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jlabel2)
-                                .addGap(27, 27, 27)
-                                .addComponent(textfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jlabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textid_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(btnQuitarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(71, 71, 71)
+                                    .addComponent(jLabel5)
+                                    .addGap(48, 48, 48)
+                                    .addComponent(hora))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(41, 41, 41)
+                                    .addComponent(selectorfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(30, 30, 30)
+                                    .addComponent(jLabel2))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(comboProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(52, 52, 52)
+                                    .addComponent(textcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(24, 24, 24))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jLabel6)
+                                    .addGap(93, 93, 93)
+                                    .addComponent(jLabel1)
+                                    .addGap(211, 211, 211))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(101, 101, 101)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textid_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlabel1))
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlabel2))))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BuscarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboProductos)
+                            .addComponent(textcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboEstado)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hora)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(10, 10, 10)
+                        .addComponent(selectorfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuitarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void accionbtnbtnGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnbtnGuardar
-        // TODO add your handling code here:     
-        String id_cuentaStr = textid_cuenta.getText();
-        String fecha_ordenStr = textfecha_orden.getText();
-
-        if (!id_cuentaStr.trim().isEmpty() && !fecha_ordenStr.trim().isEmpty()) {
-            try {
-                int id_cuenta = Integer.parseInt(id_cuentaStr.trim());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-                LocalDateTime fecha_orden = LocalDateTime.parse(fecha_ordenStr.trim(), formatter);
-
-                ordenControlador.crearOrden(id_cuenta, fecha_orden);
-                cargarDatosTabla();
-                textid_cuenta.setText("");
-                textfecha_orden.setText("");
-                javax.swing.JOptionPane.showMessageDialog(this, "Orden guardada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar la orden: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-    
-
-    }//GEN-LAST:event_accionbtnbtnGuardar
-
-    private void accionbtnActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnActualizar
-        String id_cuenta = textid_cuenta.getText();
-String fecha_orden = textfecha_orden.getText();
-
-if (idOrdenSeleccionada != null && !id_cuenta.isEmpty() && !fecha_orden.isEmpty()) { 
-    try {
-        int id_cuentaInt = Integer.parseInt(id_cuenta.trim());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime fechaOrdenDateTime = LocalDateTime.parse(fecha_orden.trim(), formatter);
-
-        ordenControlador.actualizarOrden(idOrdenSeleccionada, id_cuentaInt, fechaOrdenDateTime);
-        cargarDatosTabla();
-
-        textid_cuenta.setText("");
-        textfecha_orden.setText("");
-        idOrdenSeleccionada = null;
-
-        btnEliminar.setEnabled(true);
-        btnGuardar.setEnabled(true);
-
-        javax.swing.JOptionPane.showMessageDialog(this, "Orden actualizada exitosamente", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar la orden: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-}
-
-
-    }//GEN-LAST:event_accionbtnActualizar
-
-    private void accionbtnbtnEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnbtnEliminar
+    private void textBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarActionPerformed
         // TODO add your handling code here:
-         int filaSeleccionada = tablaOrden.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            int idOrden= (int) tablaOrden.getValueAt(filaSeleccionada, 0);
-            ordenControlador.eliminarOrden(idOrden);
-            cargarDatosTabla();
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una fila para eleiminar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE); 
-        }  
-    }    
-
-
-    private void tablaOrdenMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        // TODO add your handling code here:
-          if (evt.getClickCount()== 2) {
-            int filaSeleccionada = tablaOrden.getSelectedRow();
-            if (filaSeleccionada != -1) {
-                int idOrdenSeleccionada = (Integer) tablaOrden.getValueAt(filaSeleccionada, 0);
-                int id_cuenta = (Integer) tablaOrden.getValueAt(filaSeleccionada, 1);
-                LocalDateTime fecha_orden = (LocalDateTime) tablaOrden.getValueAt(filaSeleccionada, 2);
-                
-                textid_cuenta.setText(String.valueOf(id_cuenta));
-                textfecha_orden.setText(String.valueOf(fecha_orden));
-                
-                btnEliminar.setEnabled(false);
-                btnGuardar.setEnabled(false);
-            }
-        } 
-
-    }//GEN-LAST:event_accionbtnbtnEliminar
+    }//GEN-LAST:event_textBuscarActionPerformed
 
     private void textBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBuscarKeyTyped
-        // TODO add your handling code here:
-        String textoBusqueda = BuscarOrden.getText().trim().toLowerCase();
-List<Orden> ordenes = ordenControlador.obtenerTodasOrdenes();
+        String textoBusqueda = textBuscar.getText().trim().toLowerCase();
+        List<Orden> ordenes = ordenControlador.obtenerTodasOrdenes();
 
-DefaultTableModel modelo = (DefaultTableModel) tablaOrden.getModel();
-modelo.setRowCount(0);
+        DefaultTableModel modelo = (DefaultTableModel) tablaOrdenes.getModel();
+        modelo.setRowCount(0);
 
-if (ordenes != null) {
-    for (Orden ord : ordenes) {
-        try {
-            String idOrden = String.valueOf(ord.getIdOrden()).toLowerCase();
-            String idCuenta = String.valueOf(ord.getId_cuenta()).toLowerCase();
-            String fechaOrden = ord.getFecha_orden() != null ? ord.getFecha_orden().toString().toLowerCase() : "";
-
-            if (textoBusqueda.isEmpty() ||
-                idOrden.contains(textoBusqueda) ||
-                idCuenta.contains(textoBusqueda) ||
-                fechaOrden.contains(textoBusqueda)) {
-
-                Object[] fila = {
-                    ord.getIdOrden(),
-                    ord.getId_cuenta(),
-                    ord.getFecha_orden()
-                };
-                modelo.addRow(fila);
+        if (ordenes != null) {
+            for (Orden o : ordenes) {
+                String fechaOrden = o.getFecha_orden().toString().toLowerCase();
+                if (textoBusqueda.isEmpty() || fechaOrden.contains(textoBusqueda)) {
+                    Object[] fila = {
+                        o.getIdOrden(),
+                        o.getFecha_orden()
+                    };
+                    modelo.addRow(fila);
+                }
             }
-        } catch (NullPointerException e) {
-            System.out.println("Error al procesar la orden: " + e.getMessage());
         }
-    }
-}
-
     }//GEN-LAST:event_textBuscarKeyTyped
+
+    private void accionbtnQuitarDetalles(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnQuitarDetalles
+        try {
+            int filaSeleccionada = tablaDetalles.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione un detalle para quitar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tablaDetalles.getModel();
+            model.removeRow(filaSeleccionada);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al quitar el detalle: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_accionbtnQuitarDetalles
+
+    private void tablaOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOrdenesMouseClicked
+
+        // Verificar si es doble clic
+        if (evt.getClickCount() == 2) {
+            try {
+                // Deshabilitar botones
+                btnEliminar.setEnabled(false);
+                btnGuardar.setEnabled(false);
+
+                // Obtener la fila seleccionada
+                int filaSeleccionada = tablaOrdenes.getSelectedRow();
+                if (filaSeleccionada == -1) {
+                    JOptionPane.showMessageDialog(this, "Seleccione una orden.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Obtener el ID de la orden seleccionada
+                DefaultTableModel modelOrden = (DefaultTableModel) tablaOrdenes.getModel();
+                int idOrden = (int) modelOrden.getValueAt(filaSeleccionada, 0);
+
+                // Obtener la orden
+                List<Orden> ordenes = ordenControlador.obtenerTodasOrdenes();
+                if (ordenes == null || ordenes.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No se encontraron órdenes.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Orden ordenSeleccionada = null;
+                for (Orden o : ordenes) {
+                    if (o.getIdOrden() == idOrden) {
+                        ordenSeleccionada = o;
+                        break;
+                    }
+                }
+
+                if (ordenSeleccionada == null) {
+                    JOptionPane.showMessageDialog(this, "Orden no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Detener el timer si existe
+                if (timer != null) {
+                    timer.stop();
+                }
+
+                // Asignar la hora
+                horabd = true;
+                java.text.SimpleDateFormat horaFormato = new java.text.SimpleDateFormat("HH:mm:ss");
+                Date fechaOrden = ordenSeleccionada.getFecha_orden();
+                if (fechaOrden == null) {
+                    JOptionPane.showMessageDialog(this, "Fecha de la orden no válida.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                String horaOrden = horaFormato.format(fechaOrden);
+                hora.setText(horaOrden);
+
+                // Asignar fecha al selector
+                selectorfecha_orden.setDate(fechaOrden);
+
+                // Limpiar tabla de detalles
+                DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
+                modelDetalles.setRowCount(0);
+
+                // Cargar detalles de la orden
+                List<Detalle_Orden> detalles = detalleOrdenControlador.obtenerTodosDetalleOrden();
+                if (detalles == null || detalles.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No se encontraron detalles para esta orden.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                for (Detalle_Orden detalle : detalles) {
+                    if (detalle.getIdOrden() == idOrden) {
+                        Producto Producto = productoControlador.obtenerProductoPorId(detalle.getId_producto());
+                        String nombre_producto = (Producto != null) ? Producto.getNombre_producto() : "Desconocido";
+
+                        Object[] fila = {
+                            detalle.getId_producto(),
+                            nombre_producto,
+                            detalle.getEstado_orden(),
+                            detalle.getCantidad()
+                        };
+                        modelDetalles.addRow(fila);
+                    }
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al cargar los datos de la orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace(); // Imprimir el stack trace para depuración
+            }
+        }
+    }//GEN-LAST:event_tablaOrdenesMouseClicked
+
+    private void accionbtnLimpiar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnLimpiar
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_accionbtnLimpiar
+
+    private void accionbtnEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnEliminar
+        try {
+            int fila = tablaOrdenes.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una orden para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tablaOrdenes.getModel();
+            int idOrden = (int) model.getValueAt(fila, 0);
+
+            int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Desea eliminar la orden con ID " + idOrden + "?", "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                List<Detalle_Orden> detalles = detalleOrdenControlador.obtenerTodosDetalleOrden();
+                for (Detalle_Orden d : detalles) {
+                    if (d.getIdOrden() == idOrden) {
+                        detalleOrdenControlador.eliminarDetalleOrden(d.getId_detalle_orden());
+                    }
+                }
+                ordenControlador.eliminarOrden(idOrden);
+                limpiar();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_accionbtnEliminar
+
+    private void accionbtnAgregar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnAgregar
+        try {
+            int indiceSeleccionado = comboProductos.getSelectedIndex();
+            if (indiceSeleccionado <= 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione un producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            List<Producto> productos = productoControlador.obtenerTodosProductos();
+            Producto productoSeleccionado = productos.get(indiceSeleccionado - 1);
+
+            String estado_orden = (String) comboEstado.getSelectedItem();
+            if (estado_orden == null || estado_orden.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Seleccione un estado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int cantidad;
+            try {
+                cantidad = Integer.parseInt(textcantidad.getText().trim());
+                if (cantidad <= 0) {
+                    JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tablaDetalles.getModel();
+            Object[] row = {
+                productoSeleccionado.getId_producto(),
+                productoSeleccionado.getNombre_producto(),
+                estado_orden,
+                cantidad
+            };
+            model.addRow(row);
+
+            comboProductos.setSelectedIndex(0);
+            comboEstado.setSelectedIndex(0);
+            textcantidad.setText("");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al agregar el detalle: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_accionbtnAgregar
+
+    private void accionbtnActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnActualizar
+        try {
+            int filaSeleccionada = tablaOrdenes.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una orden.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // Obtener el idOrden de la fila seleccionada
+            DefaultTableModel modelOrdenes = (DefaultTableModel) tablaOrdenes.getModel();
+            int idOrden = (int) modelOrdenes.getValueAt(filaSeleccionada, 0);
+            
+             // Obtener la fecha seleccionada
+            Date fecha_orden = selectorfecha_orden.getDate();
+            if (fecha_orden == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // Obtener los detalles de la tabla tablaDetalles
+            DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
+            int rowCount = modelDetalles.getRowCount();
+            if (rowCount == 0) {
+                JOptionPane.showMessageDialog(this, "Agregue al menos un producto a la venta.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+             // Actualizar la orden principal
+            ordenControlador.actualizarOrden(idOrden, fecha_orden);
+            
+             // Eliminar los detalles antiguos de la orden
+            List<Detalle_Orden> detallesAntiguos = detalleOrdenControlador.obtenerTodosDetalleOrden();
+            if (detallesAntiguos != null) {
+                for (Detalle_Orden detalle : detallesAntiguos) {
+                    if (detalle.getIdOrden()== idOrden) {
+                        detalleOrdenControlador.eliminarDetalleOrden(detalle.getId_detalle_orden());
+                    }
+                }
+            }
+
+             List<Detalle_Orden> nuevosDetalles = new ArrayList<>();
+            for (int i = 0; i < modelDetalles.getRowCount(); i++) {
+                int idProd = (int) modelDetalles.getValueAt(i, 0);
+                String estado = (String) modelDetalles.getValueAt(i, 2);
+                int cantidad = (int) modelDetalles.getValueAt(i, 3);
+                
+              // Crear y guardar el nuevo detalle
+                Detalle_Orden detalle = new Detalle_Orden();
+                detalle.setIdOrden(idOrden);
+                detalle.setId_producto(idProd);
+                detalle.setEstado_orden(estado);
+                detalle.setCantidad(cantidad);
+                nuevosDetalles.add(detalle);
+                detalleOrdenControlador.crearDetalleOrden(idOrden, idProd, estado, cantidad);
+            }
+            // Limpiar la tabla de detalles y el formulario
+            tablaDetalles.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"ID Producto", "Producto", "estado_orden", "Cantidad"}));
+            limpiar();
+            
+            // Recargar la tabla de ordenes
+            cargarDatosTablaOrdenes();
+
+            // Habilitar botones nuevamente
+            btnEliminar.setEnabled(true);
+            btnGuardar.setEnabled(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+   
+    }//GEN-LAST:event_accionbtnActualizar
+
+    private void btnGuardaraccionBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaraccionBotonGuardar
+        try {
+            Date fechaOrden = selectorfecha_orden.getDate();
+            if (fechaOrden == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tablaDetalles.getModel();
+            if (model.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Agregue al menos un producto a la orden.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Crear lista de detalles
+            List<Detalle_Orden> detalles = new ArrayList<>();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                int idProd = (int) model.getValueAt(i, 0);
+                String estado = (String) model.getValueAt(i, 2);
+                int cantidad = (int) model.getValueAt(i, 3);
+
+                // Crear objeto DetalleOrden
+                Detalle_Orden detalle = new Detalle_Orden();
+                detalle.setId_producto(idProd);
+                detalle.setEstado_orden(estado);
+                detalle.setCantidad(cantidad);
+                detalles.add(detalle);
+            }
+
+            // Crear y guardar la orden
+            ordenControlador.crearOrden(fechaOrden, detalles);
+            limpiar();
+            cargarDatosTablaOrdenes();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar la orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGuardaraccionBotonGuardar
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Actualizar;
-    private javax.swing.JButton Buscar;
-    private javax.swing.JTextField BuscarOrden;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnQuitarDetalle;
+    private javax.swing.JComboBox<String> comboEstado;
+    private javax.swing.JComboBox<String> comboProductos;
+    private javax.swing.JLabel hora;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel jlabel1;
-    private javax.swing.JLabel jlabel2;
-    private javax.swing.JTable tablaOrden;
-    private javax.swing.JTextField textfecha_orden;
-    private javax.swing.JTextField textid_cuenta;
+    private com.toedter.calendar.JDateChooser selectorfecha_orden;
+    private javax.swing.JTable tablaDetalles;
+    private javax.swing.JTable tablaOrdenes;
+    private javax.swing.JTextField textBuscar;
+    private javax.swing.JTextField textcantidad;
     // End of variables declaration//GEN-END:variables
 }

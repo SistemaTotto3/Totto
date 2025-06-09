@@ -4,7 +4,7 @@
  */
 package Modelo;
 
-import java.time.LocalDateTime;
+
 
 /**
  *
@@ -15,15 +15,15 @@ public class Detalle_Orden {
     private int id_detalle_orden;
     private int idOrden; //Relacion con orden
     private int id_producto; //Relacion con producto
-    private LocalDateTime fecha_orden;
     private String estado_orden;
+    private int cantidad;
 
-    public Detalle_Orden(int id_detalle_orden, int idOrden, int id_producto, LocalDateTime fecha_orden, String estado_orden) {
+    public Detalle_Orden(int id_detalle_orden, int idOrden, int id_producto, String estado_orden, int cantidad) {
         this.id_detalle_orden = id_detalle_orden;
         this.idOrden = idOrden;
         this.id_producto = id_producto;
-        this.fecha_orden = fecha_orden;
         this.estado_orden = estado_orden;
+        this.cantidad = cantidad;
     }
 
     public Detalle_Orden() {
@@ -53,14 +53,6 @@ public class Detalle_Orden {
         this.id_producto = id_producto;
     }
 
-    public LocalDateTime getFecha_orden() {
-        return fecha_orden;
-    }
-
-    public void setFecha_orden(LocalDateTime fecha_orden) {
-        this.fecha_orden = fecha_orden;
-    }
-
     public String getEstado_orden() {
         return estado_orden;
     }
@@ -69,5 +61,13 @@ public class Detalle_Orden {
         this.estado_orden = estado_orden;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     
 }

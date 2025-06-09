@@ -6,10 +6,15 @@ package Controlador;
 
 import DAO.Detalle_OrdenDAO;
 import Modelo.Detalle_Orden;
+import Util.ConexionDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,20 +22,20 @@ import javax.swing.JOptionPane;
  */
 public class Detalle_OrdenControlador {
 
-    private final Detalle_OrdenDAO detalleOrdenDAO;
+      private final Detalle_OrdenDAO detalleOrdenDAO;
 
     public Detalle_OrdenControlador() {
         this.detalleOrdenDAO = new Detalle_OrdenDAO();
     }
 
     // Método para crear un nuevo Detalle de Orden
-    public void crearDetalleOrden(int idOrden, int id_producto, LocalDateTime fechaOrden, String estadoOrden) {
+    public void crearDetalleOrden(int idOrden, int id_producto,String estado_orden, int cantidad) {
         try {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setIdOrden(idOrden);
             detalle.setId_producto(id_producto);
-            detalle.setFecha_orden(fechaOrden);
-            detalle.setEstado_orden(estadoOrden);
+            detalle.setEstado_orden(estado_orden);
+            detalle.setCantidad(cantidad);
             detalleOrdenDAO.crearDetalleOrden(detalle);
             JOptionPane.showMessageDialog(null, "Detalle de Orden creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -47,16 +52,17 @@ public class Detalle_OrdenControlador {
             return null;
         }
     }
+    
 
     // Método para actualizar un Detalle de Orden existente
-    public void actualizarDetalleOrden(int idDetalleOrden, int idOrden, int id_producto, LocalDateTime fechaOrden, String estadoOrden) {
+    public void actualizarDetalleOrden(int idDetalleOrden, int idOrden, int id_producto, String estado_orden, int cantidad) {
         try {
             Detalle_Orden detalle = new Detalle_Orden();
             detalle.setId_detalle_orden(idDetalleOrden);
             detalle.setIdOrden(idOrden);
             detalle.setId_producto(id_producto);
-            detalle.setFecha_orden(fechaOrden);
-            detalle.setEstado_orden(estadoOrden);
+            detalle.setEstado_orden(estado_orden);
+            detalle.setCantidad(cantidad);
             detalleOrdenDAO.actualizarDetalleOrden(detalle);
             JOptionPane.showMessageDialog(null, "Detalle de Orden actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -74,31 +80,5 @@ public class Detalle_OrdenControlador {
         }
     }
 
-    // Método main para pruebas
-    public static void main(String[] args) {
-        Detalle_OrdenControlador controlador = new Detalle_OrdenControlador();
-
-
-        // Crear un detalle de orden
-        controlador.crearDetalleOrden(1, 1, LocalDateTime.of(2025, 4, 29, 10, 0), "Entregado");
-
-        // Leer todos los detalles de orden
-        List<Detalle_Orden> detalles = controlador.obtenerTodosDetalleOrden();
-        if (detalles != null) {
-            System.out.println("Lista de detalles de orden:");
-            for (Detalle_Orden d : detalles) {
-                System.out.println("ID Detalle Orden: " + d.getId_detalle_orden()
-                        + ", ID Orden: " + d.getIdOrden()
-                        + ", ID Producto: " + d.getId_producto()
-                        + ", Fecha Orden: " + d.getFecha_orden()
-                        + ", Estado Orden: " + d.getEstado_orden());
-            }
-        }
-
-        // Actualizar un detalle de orden (asumiendo que ID 1 existe)
-        controlador.actualizarDetalleOrden(1, 1, 2, LocalDateTime.of(2025, 5, 1, 12, 0), "En preparación");
-
-        // Eliminar un detalle de orden
-        controlador.eliminarDetalleOrden(1);
-    }
+ 
 }

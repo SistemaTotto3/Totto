@@ -25,15 +25,15 @@ public class Detalle_OrdenDAO {
         INSERT INTO  Detalle_Orden (
             idOrden, 
             id_producto, 
-            fecha_orden, 
-            estado_orden
+            estado_orden,
+            cantidad
         ) VALUES (?, ?, ?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdOrden());
             stmt.setInt(2, detalle.getId_producto());
-            stmt.setTimestamp(3,java.sql.Timestamp.valueOf(detalle.getFecha_orden()));
-            stmt.setString(4, detalle.getEstado_orden());
+            stmt.setString(3, detalle.getEstado_orden());
+            stmt.setInt(4, detalle.getCantidad());
             stmt.executeUpdate();
         }
     }
@@ -48,8 +48,8 @@ public class Detalle_OrdenDAO {
                 detalle.setId_detalle_orden(rs.getInt("id_detalle_orden"));
                 detalle.setIdOrden(rs.getInt("idOrden"));
                 detalle.setId_producto(rs.getInt("id_producto"));
-                detalle.setFecha_orden(rs.getObject("fecha_orden", LocalDateTime.class));
                 detalle.setEstado_orden(rs.getString("estado_orden"));
+                detalle.setCantidad(rs.getInt("cantidad"));
                 detalles.add(detalle);
             }
         }
@@ -57,14 +57,13 @@ public class Detalle_OrdenDAO {
     }
 
     public void actualizarDetalleOrden(Detalle_Orden detalle) throws SQLException {
-        String sql = "UPDATE Detalle_Orden SET idOrden = ?, id_producto = ?, fecha_orden = ?, estado_orden= ? WHERE id_detalle_orden = ?";
+        String sql = "UPDATE Detalle_Orden SET idOrden = ?, id_producto = ?,estado_orden= ?, cantidad= ? WHERE id_detalle_orden = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdOrden());
             stmt.setInt(2, detalle.getId_producto());
-            stmt.setTimestamp(3, java.sql.Timestamp.valueOf(detalle.getFecha_orden()));
-            stmt.setString(4, detalle.getEstado_orden());
-            stmt.setInt(5, detalle.getId_detalle_orden());
+            stmt.setString(3, detalle.getEstado_orden());
+            stmt.setInt(4, detalle.getId_detalle_orden());
             stmt.executeUpdate();
         }
     }
@@ -79,32 +78,4 @@ public class Detalle_OrdenDAO {
         }
     }
 
-// Método Main
-    public static void main(String[] args) {
-        try {
-            Detalle_OrdenDAO dao = new Detalle_OrdenDAO();
-
-            // Actualizar un cliente
-            Detalle_Orden detalle = new Detalle_Orden();
-            detalle.setId_detalle_orden(1); // ID existente
-            detalle.setIdOrden(2);
-            detalle.setId_producto(3);
-            detalle.setFecha_orden(LocalDateTime.now());
-            detalle.setEstado_orden("Activa");
-            dao.actualizarDetalleOrden(detalle);
-            System.out.println("Detalle_Orden actualizado.");
-
-            // Leer y mostrar todos los clientes para verificar
-            List<Detalle_Orden> detalles = dao.leerTodosDetalle_Orden();
-            System.out.println("Lista de detalles_orden:");
-            for (Detalle_Orden det : detalles) {
-                System.out.println("id_detalle_orden: " + det.getId_detalle_orden()
-                        + ", idOrden: " + det.getIdOrden() + "id_producto " + det.getId_producto()
-                        + " fecha_orden" + det.getFecha_orden() + " estado_orden" + det.getEstado_orden());
-
-            }
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
 }

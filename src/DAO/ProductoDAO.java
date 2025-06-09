@@ -84,6 +84,26 @@ String sql = "UPDATE Producto SET nombre_producto = ?, precio_costo = ?, precio_
             stmt.executeUpdate();
         }
     }
+    public Producto obtenerProductoPorId(int idProducto) throws SQLException {
+    String sql = "SELECT * FROM Producto WHERE id_producto = ?";
+    Producto producto = null;
+
+    try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
+        stmt.setInt(1, idProducto);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                producto = new Producto();
+                producto.setId_producto(rs.getInt("id_producto"));
+                producto.setNombre_producto(rs.getString("nombre_producto"));
+                producto.setPrecio_venta(rs.getFloat("precio_venta"));
+                producto.setPrecio_costo(rs.getFloat("precio_costo"));
+                producto.setExistencia(rs.getInt("Existencia"));
+                producto.setId_categoria(rs.getInt("id_categoria"));
+            }
+        }
+    }
+    return producto;
+}
 
 // Método Main
     public static void main(String[] args) {
