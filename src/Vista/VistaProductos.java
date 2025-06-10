@@ -66,6 +66,7 @@ public class VistaProductos extends javax.swing.JPanel {
             }
         }
     }
+
     private void cargarCategorias() {
         try {
 // Obtener las categorías desde el controlador
@@ -82,47 +83,49 @@ public class VistaProductos extends javax.swing.JPanel {
                     "Error al cargar las categorías: " + e.getMessage());
         }
     }
-      private void eventoComboCategorias() {
-    comboCategoria.addActionListener(e -> {
-        // Obtener el índice seleccionado
-        int indiceSeleccionado = comboCategoria.getSelectedIndex();
 
-        if (indiceSeleccionado >= 0) { // Verificar que se haya seleccionado algo
-            try {
-                // Obtener la lista de categorías desde el controlador o memoria
-                List<Categoria> categorias = categoriaControlador.obtenerTodasCategorias();
+    private void eventoComboCategorias() {
+        comboCategoria.addActionListener(e -> {
+            // Obtener el índice seleccionado
+            int indiceSeleccionado = comboCategoria.getSelectedIndex();
 
-                // Obtener el objeto de categoría correspondiente al índice seleccionado
-                Categoria categoriaSeleccionada = categorias.get(indiceSeleccionado);
+            if (indiceSeleccionado >= 0) { // Verificar que se haya seleccionado algo
+                try {
+                    // Obtener la lista de categorías desde el controlador o memoria
+                    List<Categoria> categorias = categoriaControlador.obtenerTodasCategorias();
 
-                // Actualizar la variable global con el ID de la categoría seleccionada
-                idCategoriaSeleccionada = categoriaSeleccionada.getId_categoria();
+                    // Obtener el objeto de categoría correspondiente al índice seleccionado
+                    Categoria categoriaSeleccionada = categorias.get(indiceSeleccionado);
 
-                // Mostrar el ID seleccionado en la consola (puedes quitar esta línea)
-                System.out.println("ID de la categoría seleccionada: " + idCategoriaSeleccionada);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + ex.getMessage());
+                    // Actualizar la variable global con el ID de la categoría seleccionada
+                    idCategoriaSeleccionada = categoriaSeleccionada.getId_categoria();
+
+                    // Mostrar el ID seleccionado en la consola (puedes quitar esta línea)
+                    System.out.println("ID de la categoría seleccionada: " + idCategoriaSeleccionada);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + ex.getMessage());
+                }
             }
-        }
-    });
-  }
-      private void seleccionarCategoriaEnCombo(Integer idCategoria) {
-    try {
-        // Obtener las categorías desde el controlador
-        List<Categoria> categorias = categoriaControlador.obtenerTodasCategorias();
-
-        // Recorrer las categorías y buscar la que coincida con el ID
-        for (int i = 0; i < categorias.size(); i++) {
-            Categoria categoria = categorias.get(i);
-            if (categoria.getId_categoria()== idCategoria) {
-                comboCategoria.setSelectedIndex(i);
-                break;
-            }
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + e.getMessage());
+        });
     }
-}
+
+    private void seleccionarCategoriaEnCombo(Integer idCategoria) {
+        try {
+            // Obtener las categorías desde el controlador
+            List<Categoria> categorias = categoriaControlador.obtenerTodasCategorias();
+
+            // Recorrer las categorías y buscar la que coincida con el ID
+            for (int i = 0; i < categorias.size(); i++) {
+                Categoria categoria = categorias.get(i);
+                if (categoria.getId_categoria() == idCategoria) {
+                    comboCategoria.setSelectedIndex(i);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -528,46 +531,46 @@ public class VistaProductos extends javax.swing.JPanel {
         int id_categoria = idCategoriaSeleccionada;
 
         if (!nombre_producto.isEmpty() && !precio_costoStr.isEmpty() && !precio_ventaStr.isEmpty() && !existenciaStr.isEmpty()) {
-            
-                float precio_costo = Float.parseFloat(precio_costoStr.trim().replace(",", "."));
-                float precio_venta = Float.parseFloat(precio_ventaStr.trim().replace(",", "."));
-                int existencia = Integer.parseInt(existenciaStr.trim());
-                try {
-                
-                productoControlador.crearProducto(
-                nombre_producto,
-                precio_costo,
-               precio_venta,
-               existencia,
-               id_categoria);     
-               limpiar();
-            cargarDatosTabla();
-            cargarCategorias();
 
-           } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Error en los datos: " + e.getMessage(),
-                "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+            float precio_costo = Float.parseFloat(precio_costoStr.trim().replace(",", "."));
+            float precio_venta = Float.parseFloat(precio_ventaStr.trim().replace(",", "."));
+            int existencia = Integer.parseInt(existenciaStr.trim());
+            try {
+
+                productoControlador.crearProducto(
+                        nombre_producto,
+                        precio_costo,
+                        precio_venta,
+                        existencia,
+                        id_categoria);
+                limpiar();
+                cargarDatosTabla();
+                cargarCategorias();
+
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Error en los datos: " + e.getMessage(),
+                        "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Por favor, llene todos los campos obligatorios correctamente.",
-            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Por favor, llene todos los campos obligatorios correctamente.",
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_accionbtnGuardar
 
     private void accionbtnEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnEliminar
         int filaSeleccionada = tablaProducto.getSelectedRow();
-    if (filaSeleccionada != -1) {
-        int idProducto = (int) tablaProducto.getValueAt(filaSeleccionada, 0);
-        productoControlador.eliminarProducto(idProducto);
-        cargarDatosTabla();
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Selecciona una fila para eliminar.",
-            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+        if (filaSeleccionada != -1) {
+            int idProducto = (int) tablaProducto.getValueAt(filaSeleccionada, 0);
+            productoControlador.eliminarProducto(idProducto);
+            cargarDatosTabla();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Selecciona una fila para eliminar.",
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_accionbtnEliminar
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -577,31 +580,29 @@ public class VistaProductos extends javax.swing.JPanel {
         float precio_venta = Float.parseFloat(textprecio_venta.getText());
         int existencia = Integer.parseInt(textexistencia.getText());
         int id_categoria = idCategoriaSeleccionada;
-        
 
 // Verificamos que todos los campos estén llenos y el id del producto esté seleccionado
-        if (id_productoSeleccionado != null 
+        if (id_productoSeleccionado != null
                 && !nombre_producto.isEmpty()
                 && id_categoria >= 0) {
-          
-                try {
+
+            try {
                 // Llamamos al controlador para actualizar el producto
                 productoControlador.actualizarProducto(id_productoSeleccionado,
-                     nombre_producto, precio_costo, precio_venta, existencia,id_categoria);
+                        nombre_producto, precio_costo, precio_venta, existencia, id_categoria);
 
-                
-               cargarDatosTabla(); // Vuelve a cargar los datos en la tabla después de actualizar
-            limpiar(); // Limpia los campos
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Error en los datos: " + e.getMessage(),
-                "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+                cargarDatosTabla(); // Vuelve a cargar los datos en la tabla después de actualizar
+                limpiar(); // Limpia los campos
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Error en los datos: " + e.getMessage(),
+                        "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Por favor, llene todos los campos obligatorios.",
-            "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Por favor, llene todos los campos obligatorios.",
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
 
 
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -622,11 +623,11 @@ public class VistaProductos extends javax.swing.JPanel {
                 textprecio_costo.setText(String.valueOf(precio_costo));
                 textprecio_venta.setText(String.valueOf(precio_venta));
                 textexistencia.setText(String.valueOf(existencia));
-                
+
                 // Seleccionar la categoría correspondiente en el combo
-            seleccionarCategoriaEnCombo(id_categoria);
-            idCategoriaSeleccionada = id_categoria;
-            
+                seleccionarCategoriaEnCombo(id_categoria);
+                idCategoriaSeleccionada = id_categoria;
+
                 btnEliminar.setEnabled(false);
                 btnGuardar.setEnabled(false);
             }
@@ -688,27 +689,27 @@ public class VistaProductos extends javax.swing.JPanel {
         // TODO add your handling code here:
         // TODO add your handling code here:
         comboCategoria.addActionListener(e -> {
-        // Obtener el índice seleccionado
-        int indiceSeleccionado = comboCategoria.getSelectedIndex();
+            // Obtener el índice seleccionado
+            int indiceSeleccionado = comboCategoria.getSelectedIndex();
 
-        if (indiceSeleccionado >= 0) { // Verificar que se haya seleccionado algo
-            try {
-                // Obtener la lista de categorías desde el controlador o memoria
-                List<Categoria> categorias = categoriaControlador.obtenerTodasCategorias();
+            if (indiceSeleccionado >= 0) { // Verificar que se haya seleccionado algo
+                try {
+                    // Obtener la lista de categorías desde el controlador o memoria
+                    List<Categoria> categorias = categoriaControlador.obtenerTodasCategorias();
 
-                // Obtener el objeto de categoría correspondiente al índice seleccionado
-                Categoria categoriaSeleccionada = categorias.get(indiceSeleccionado);
+                    // Obtener el objeto de categoría correspondiente al índice seleccionado
+                    Categoria categoriaSeleccionada = categorias.get(indiceSeleccionado);
 
-                // Actualizar la variable global con el ID de la categoría seleccionada
-                idCategoriaSeleccionada = categoriaSeleccionada.getId_categoria();
+                    // Actualizar la variable global con el ID de la categoría seleccionada
+                    idCategoriaSeleccionada = categoriaSeleccionada.getId_categoria();
 
-                // Mostrar el ID seleccionado en la consola (puedes quitar esta línea)
-                System.out.println("ID de la categoría seleccionada: " + idCategoriaSeleccionada);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + ex.getMessage());
+                    // Mostrar el ID seleccionado en la consola (puedes quitar esta línea)
+                    System.out.println("ID de la categoría seleccionada: " + idCategoriaSeleccionada);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + ex.getMessage());
+                }
             }
-        }
-    });
+        });
     }//GEN-LAST:event_eventoComboCategoria
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

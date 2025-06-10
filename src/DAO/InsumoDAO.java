@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import java.util.Date;
 
 /**
  *
@@ -22,13 +23,13 @@ public class InsumoDAO {
     public void crearInsumo(Insumo insumo) throws SQLException {
         String sql = """
         INSERT INTO Insumo (
-            nombre_insumo, 
-            precio_insumo
+            fecha_insumo, 
+            total_insumo
         ) VALUES (?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
-            stmt.setString(1, insumo.getNombre_insumo());
-            stmt.setFloat(2, insumo.getPrecio_insumo());
+            stmt.setTimestamp(1,new java.sql.Timestamp(insumo.getFecha_insumo().getTime()));
+            stmt.setFloat(2, insumo.getTotal_insumo());
             stmt.executeUpdate();
         }
     }
@@ -41,8 +42,8 @@ public class InsumoDAO {
             while (rs.next()) {
                 Insumo insumo = new Insumo();
                 insumo.setId_insumo(rs.getInt("id_insumo"));
-                insumo.setNombre_insumo(rs.getString("nombre_insumo"));
-                insumo.setPrecio_insumo(rs.getFloat("precio_insumo"));
+                insumo.setFecha_insumo(rs.getTimestamp("fecha_insumo"));
+                insumo.setTotal_insumo(rs.getFloat("total_insumo"));
                 insumos.add(insumo);
             }
         }
@@ -50,11 +51,11 @@ public class InsumoDAO {
     }
 
     public void actualizarInsumo(Insumo insumo) throws SQLException {
-        String sql = "UPDATE Insumo SET nombre_insumo = ?, precio_insumo = ? WHERE id_insumo = ?";
+        String sql = "UPDATE Insumo SET fecha_insumo = ?, total_insumo = ? WHERE id_insumo = ?";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
-            stmt.setString(1, insumo.getNombre_insumo());
-            stmt.setFloat(2, insumo.getPrecio_insumo());
+            stmt.setTimestamp(1,new java.sql.Timestamp(insumo.getFecha_insumo().getTime()));
+            stmt.setFloat(2, insumo.getTotal_insumo());
             stmt.setInt(3, insumo.getId_insumo());
             stmt.executeUpdate();
         }
@@ -76,8 +77,8 @@ public class InsumoDAO {
             // Actualizar un insumo
             Insumo insumo = new Insumo();
             insumo.setId_insumo(1); // ID existente
-            insumo.setNombre_insumo("Pan brioche artesanal");
-            insumo.setPrecio_insumo(0.75f);
+            insumo.setFecha_insumo(new java.util.Date());
+            insumo.setTotal_insumo(0.75f);
             dao.actualizarInsumo(insumo);
             System.out.println("Insumo actualizado.");
 
@@ -86,8 +87,8 @@ public class InsumoDAO {
             System.out.println("Lista de insumos:");
             for (Insumo ins : insumos) {
                 System.out.println("ID: " + ins.getId_insumo()
-                        + ", Nombre: " + ins.getNombre_insumo()
-                        + ", Precio: " + ins.getPrecio_insumo());
+                        + ", Fecha: " + ins.getFecha_insumo()
+                        + ", Precio: " + ins.getTotal_insumo());
             }
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());

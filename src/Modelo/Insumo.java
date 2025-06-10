@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,18 +14,18 @@ import java.util.List;
 public class Insumo {
 
     private int id_insumo;
-    private String nombre_insumo;
-    private float precio_insumo;
+    private Date fecha_insumo;
+    private float total_insumo;
     private List<Detalle_Insumo> detalles;
 
-    public Insumo(int id_insumo, String nombre_insumo, float precio_insumo, List<Detalle_Insumo> detalles) {
-        this.id_insumo = id_insumo;
-        this.nombre_insumo = nombre_insumo;
-        this.precio_insumo = precio_insumo;
-        this.detalles = detalles;
+    public Insumo() {
     }
 
-    public Insumo() {
+    public Insumo(int id_insumo, Date fecha_insumo, float total_insumo, List<Detalle_Insumo> detalles) {
+        this.id_insumo = id_insumo;
+        this.fecha_insumo = fecha_insumo;
+        this.total_insumo = total_insumo;
+        this.detalles = detalles;
     }
 
     public int getId_insumo() {
@@ -35,20 +36,20 @@ public class Insumo {
         this.id_insumo = id_insumo;
     }
 
-    public String getNombre_insumo() {
-        return nombre_insumo;
+    public Date getFecha_insumo() {
+        return fecha_insumo;
     }
 
-    public void setNombre_insumo(String nombre_insumo) {
-        this.nombre_insumo = nombre_insumo;
+    public void setFecha_insumo(Date fecha_insumo) {
+        this.fecha_insumo = fecha_insumo;
     }
 
-    public float getPrecio_insumo() {
-        return precio_insumo;
+    public float getTotal_insumo() {
+        return total_insumo;
     }
 
-    public void setPrecio_insumo(float precio_insumo) {
-        this.precio_insumo = precio_insumo;
+    public void setTotal_insumo(float total_insumo) {
+        this.total_insumo = total_insumo;
     }
 
     public List<Detalle_Insumo> getDetalles() {
@@ -58,5 +59,7 @@ public class Insumo {
     public void setDetalles(List<Detalle_Insumo> detalles) {
         this.detalles = detalles;
     }
+
+    
 
 }

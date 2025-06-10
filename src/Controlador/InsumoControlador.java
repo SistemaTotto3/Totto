@@ -5,10 +5,13 @@
 package Controlador;
 
 import DAO.InsumoDAO;
+import DAO.Detalle_InsumoDAO;
+import Modelo.Detalle_Insumo;
 import Modelo.Insumo;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 /**
  *
@@ -23,11 +26,11 @@ public class InsumoControlador {
     }
 
     // Método para crear un nuevo insumo
-    public void crearInsumo(String nombreInsumo, float precioInsumo) {
+    public void crearInsumo(Date fecha_insumo, float total_insumo,  List<Detalle_Insumo> detalles) {
         try {
             Insumo insumo = new Insumo();
-            insumo.setNombre_insumo(nombreInsumo);
-            insumo.setPrecio_insumo(precioInsumo);
+            insumo.setFecha_insumo(fecha_insumo);
+            insumo.setTotal_insumo(total_insumo);
             insumoDAO.crearInsumo(insumo);
             JOptionPane.showMessageDialog(null, "Insumo creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -46,12 +49,12 @@ public class InsumoControlador {
     }
 
     // Método para actualizar un insumo existente
-    public void actualizarInsumo(int idInsumo, String nombreInsumo, float precioInsumo) {
+    public void actualizarInsumo(int id_insumo, Date fecha_insumo, float total_insumo) {
         try {
             Insumo insumo = new Insumo();
-            insumo.setId_insumo(idInsumo);
-            insumo.setNombre_insumo(nombreInsumo);
-            insumo.setPrecio_insumo(precioInsumo);
+            insumo.setId_insumo(id_insumo);
+            insumo.setFecha_insumo(fecha_insumo);
+            insumo.setTotal_insumo(total_insumo);
             insumoDAO.actualizarInsumo(insumo);
             JOptionPane.showMessageDialog(null, "Insumo actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -73,22 +76,16 @@ public class InsumoControlador {
     public static void main(String[] args) {
         InsumoControlador controlador = new InsumoControlador();
 
-        // Crear un insumo
-        controlador.crearInsumo("Pan blanco", 0.55f);
-
         // Leer todos los insumos
         List<Insumo> insumos = controlador.obtenerTodosInsumos();
         if (insumos != null) {
             System.out.println("Lista de insumos:");
             for (Insumo i : insumos) {
                 System.out.println("ID: " + i.getId_insumo()
-                        + ", Nombre: " + i.getNombre_insumo()
-                        + ", Precio: " + i.getPrecio_insumo());
+                        + ", Fecha: " + i.getFecha_insumo()
+                        + ", Precio: " + i.getTotal_insumo());
             }
         }
-
-        // Actualizar un insumo (suponiendo que ID 1 existe)
-        controlador.actualizarInsumo(1, "Pan blanco", 0.60f);
 
         // Eliminar un insumo
         controlador.eliminarInsumo(1);

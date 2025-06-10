@@ -10,19 +10,23 @@ package Modelo;
  */
 public class Detalle_Insumo {
 
-    private int id_detalle_insumo;
+     private int id_detalle_insumo;
     private int id_insumo; //Relacion con Insumo
     private int id_producto; //Relacion con producto
-    private double cantidad_insumo;
+    private String nombre_insumo;
+    private float cantidad_insumo;
+    private float precio_insumo;
 
-    public Detalle_Insumo(int id_detalle_insumo, int id_insumo, int id_producto, double cantidad_insumo) {
+    public Detalle_Insumo() {
+    }
+
+    public Detalle_Insumo(int id_detalle_insumo, int id_insumo, int id_producto, String nombre_insumo, float cantidad_insumo, float precio_insumo) {
         this.id_detalle_insumo = id_detalle_insumo;
         this.id_insumo = id_insumo;
         this.id_producto = id_producto;
+        this.nombre_insumo = nombre_insumo;
         this.cantidad_insumo = cantidad_insumo;
-    }
-
-    public Detalle_Insumo() {
+        this.precio_insumo = precio_insumo;
     }
 
     public int getId_detalle_insumo() {
@@ -49,13 +53,30 @@ public class Detalle_Insumo {
         this.id_producto = id_producto;
     }
 
-    public double getCantidad_insumo() {
+    public String getNombre_insumo() {
+        return nombre_insumo;
+    }
+
+    public void setNombre_insumo(String nombre_insumo) {
+        this.nombre_insumo = nombre_insumo;
+    }
+
+    public float getCantidad_insumo() {
         return cantidad_insumo;
     }
 
-    public void setCantidad_insumo(double cantidad_insumo) {
+    public void setCantidad_insumo(float cantidad_insumo) {
         this.cantidad_insumo = cantidad_insumo;
     }
 
+    public float getPrecio_insumo() {
+        return precio_insumo;
+    }
+
+    public void setPrecio_insumo(float precio_insumo) {
+        this.precio_insumo = precio_insumo;
+    }
+
+    
     
 }

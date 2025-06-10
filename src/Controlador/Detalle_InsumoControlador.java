@@ -22,12 +22,14 @@ public class Detalle_InsumoControlador {
         this.detalleInsumoDAO = new Detalle_InsumoDAO();
     }
 
-    public void crearDetalleInsumo(int id_insumo, int id_producto, double cantidad_insumo) {
+    public void crearDetalleInsumo(int id_insumo, int id_producto,String nombre_insumo, float cantidad_insumo, float precio_insumo) {
         try {
             Detalle_Insumo detalle = new Detalle_Insumo();
             detalle.setId_insumo(id_insumo);
             detalle.setId_producto(id_producto);
+            detalle.setNombre_insumo(nombre_insumo);
             detalle.setCantidad_insumo(cantidad_insumo);
+            detalle.setPrecio_insumo(precio_insumo);
             detalleInsumoDAO.crearDetalleInsumo(detalle);
             JOptionPane.showMessageDialog(null, "Detalle de Insumo creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -44,13 +46,15 @@ public class Detalle_InsumoControlador {
         }
     }
 
-    public void actualizarDetalleInsumo(int id_detalle_insumo, int id_insumo, int id_producto, double cantidad_insumo) {
+    public void actualizarDetalleInsumo(int id_detalle_insumo, int id_insumo, int id_producto, String nombre_insumo, float cantidad_insumo, float precio_insumo) {
         try {
             Detalle_Insumo detalle = new Detalle_Insumo();
             detalle.setId_detalle_insumo(id_detalle_insumo);
             detalle.setId_insumo(id_insumo);
             detalle.setId_producto(id_producto);
+            detalle.setNombre_insumo(nombre_insumo);
             detalle.setCantidad_insumo(cantidad_insumo);
+            detalle.setPrecio_insumo(precio_insumo);
             detalleInsumoDAO.actualizarDetalleInsumo(detalle);
             JOptionPane.showMessageDialog(null, "Detalle de Insumo actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -72,7 +76,7 @@ public class Detalle_InsumoControlador {
 
         try {
             // Crear un detalle de insumo
-            controlador.crearDetalleInsumo(1, 1, 1.0);
+            controlador.crearDetalleInsumo(1, 1,"Tomate", 1.50f, 33.22f);
 
             // Leer todos los detalles de insumo
             List<Detalle_Insumo> detalles = controlador.obtenerTodosDetalleInsumo();
@@ -82,12 +86,13 @@ public class Detalle_InsumoControlador {
                     System.out.println("ID Detalle Insumo: " + d.getId_detalle_insumo()
                             + ", ID Insumo: " + d.getId_insumo()
                             + ", ID Producto: " + d.getId_producto()
+                            + ", Nombre: "+ d.getNombre_insumo()
                             + ", Cantidad Insumo: " + d.getCantidad_insumo());
                 }
             }
 
             // Actualizar un detalle de insumo
-            controlador.actualizarDetalleInsumo(1, 1, 2, 2.0);
+            controlador.actualizarDetalleInsumo(1, 1, 2,"Tomate", 2.50f, 35.50f);
 
             // Eliminar un detalle de insumo
             controlador.eliminarDetalleInsumo(1);

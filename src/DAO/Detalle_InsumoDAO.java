@@ -23,14 +23,18 @@ public class Detalle_InsumoDAO {
         String sql = """
         INSERT INTO  Detalle_Insumo (
             id_insumo, 
-            id_producto, 
+            id_producto,
+            nombre_insumo,
             cantidad_insumo
-        ) VALUES (?, ?, ?)""";
+            precio_insumo
+        ) VALUES (?, ?, ?, ?, ?)""";
 
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getId_insumo());
             stmt.setInt(2, detalle.getId_producto());
-            stmt.setDouble(3, detalle.getCantidad_insumo());
+            stmt.setString(3, detalle.getNombre_insumo());
+            stmt.setDouble(4, detalle.getCantidad_insumo());
+            stmt.setFloat(5, detalle.getPrecio_insumo());
             stmt.executeUpdate();
         }
     }
@@ -46,7 +50,9 @@ public class Detalle_InsumoDAO {
                 detalle.setId_detalle_insumo(rs.getInt("id_detalle_insumo"));
                 detalle.setId_insumo(rs.getInt("id_insumo"));
                 detalle.setId_producto(rs.getInt("id_producto"));
-                detalle.setCantidad_insumo(rs.getDouble("cantidad_insumo"));
+                detalle.setNombre_insumo(rs.getString("nombre_insumo"));
+                detalle.setCantidad_insumo(rs.getFloat("cantidad_insumo"));
+                detalle.setPrecio_insumo(rs.getFloat("precio_insumo"));
                 detalles.add(detalle);
             }
         }
@@ -59,8 +65,10 @@ public class Detalle_InsumoDAO {
         try (Connection c = ConexionDB.getConnection(); PreparedStatement stmt = c.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getId_insumo());
             stmt.setInt(2, detalle.getId_producto());
-            stmt.setDouble(3, detalle.getCantidad_insumo());
-            stmt.setInt(4, detalle.getId_detalle_insumo());
+            stmt.setString(3, detalle.getNombre_insumo());
+            stmt.setDouble(4, detalle.getCantidad_insumo());
+            stmt.setFloat(5, detalle.getPrecio_insumo());
+            stmt.setInt(6, detalle.getId_detalle_insumo());
             stmt.executeUpdate();
         }
     }
@@ -85,7 +93,9 @@ public class Detalle_InsumoDAO {
             detalle.setId_detalle_insumo(1); // ID existente
             detalle.setId_insumo(2);
             detalle.setId_producto(3);
-            detalle.setCantidad_insumo(4);
+            detalle.setNombre_insumo("Tomate");
+            detalle.setCantidad_insumo(5);
+            detalle.setPrecio_insumo(200.0f);
             dao.actualizarDetalleInsumo(detalle);
             System.out.println("Detalle_Insumo actualizado.");
 
@@ -95,7 +105,9 @@ public class Detalle_InsumoDAO {
             for (Detalle_Insumo det : detalles) {
                 System.out.println("id_detalle_insumo: " + det.getId_detalle_insumo()
                         + ", id_insumo: " + det.getId_insumo()+ "id_producto " + det.getId_producto()
-                        +  " cantidad_insumo" + det.getCantidad_insumo());
+                        + ", nombre_insumo: " + det.getNombre_insumo()
+                        +  " cantidad_insumo" + det.getCantidad_insumo()
+                        + ", precio_insumo:" + det.getPrecio_insumo());
 
             }
         } catch (SQLException e) {
