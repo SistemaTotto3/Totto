@@ -9,6 +9,17 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
+import java.awt.FileDialog;
 
 /**
  *
@@ -228,6 +239,11 @@ public class VistaClientes extends javax.swing.JPanel {
         jLabel10.setText("Reportes");
 
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/reporte (1).png"))); // NOI18N
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionGenerarReportes(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -531,6 +547,77 @@ public class VistaClientes extends javax.swing.JPanel {
         btnEliminar.setEnabled(true);
         btnGuardar.setEnabled(true);
     }//GEN-LAST:event_accionbtnLimpiarCliente
+
+    private void accionGenerarReportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionGenerarReportes
+        // TODO add your handling code here:
+        try {
+            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF",FileDialog.SAVE);
+            dialogoArchivo.setFile("ReportesClientes.pdf");
+            dialogoArchivo.setVisible(true);
+            
+        String ruta = dialogoArchivo.getDirectory();
+        String nombreArchivo = dialogoArchivo.getFile();
+        
+        if (ruta == null ||nombreArchivo == null){
+            JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        String rutaCompleta = ruta + nombreArchivo;
+        
+        PdfWriter escritor = new PdfWriter(rutaCompleta);
+        PdfDocument pdf= new PdfDocument(escritor);
+        Document documento = new Document(pdf);
+        
+        documento.add(new Paragraph("Reportes de Clientes")
+        .setTextAlignment(TextAlignment.CENTER)
+        .setFontSize(20)
+        .setBold());
+        
+        documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
+        .setTextAlignment(TextAlignment.CENTER)
+        .setFontSize(12));
+        
+        Table tabla = new Table(5);
+        tabla.setWidth(UnitValue.createPercentValue(100));
+        tabla.addHeaderCell("ID Cliente").setBold();
+        tabla.addHeaderCell("nombre_1").setBold();
+        tabla.addHeaderCell("apellido_1").setBold();
+         tabla.addHeaderCell("direccion_cliente").setBold();
+        tabla.addHeaderCell("telefono_cliente").setBold();
+
+        List<Cliente> listaClientes =
+        clienteControlador.obtenerTodosClientes();
+        if (listaClientes != null){
+            for (Cliente cliente : listaClientes){
+                tabla.addCell(String.valueOf(cliente.getIdCliente()));
+                tabla.addCell(String.valueOf(cliente.getNombre_1()));
+                tabla.addCell(String.valueOf(cliente.getApellido_1()));
+                tabla.addCell(String.valueOf(cliente.getDirrecion_cliente()));
+                tabla.addCell(String.valueOf(cliente.getTelefono_cliente()));
+                
+            }
+        }
+        documento.add(tabla);
+        
+        documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
+        .setFontSize(10)
+        .setMarginTop(20));
+        
+        documento.close();
+        
+        JOptionPane.showMessageDialog(
+                    this,
+                "Reporte pdf generado con exito en:" + rutaCompleta,
+                "Exito", JOptionPane.INFORMATION_MESSAGE);
+        
+        }catch (Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al Generar el PDF:" + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE );
+        }
+    }//GEN-LAST:event_accionGenerarReportes
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

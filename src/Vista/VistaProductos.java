@@ -8,9 +8,20 @@ import Controlador.ProductoControlador;
 import Controlador.CategoriaControlador;
 import Modelo.Producto;
 import Modelo.Categoria;
+import java.awt.FileDialog;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
+import java.awt.FileDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -348,6 +359,11 @@ public class VistaProductos extends javax.swing.JPanel {
         });
 
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/reporte (1)_1.png"))); // NOI18N
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionGenerarReportes(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -711,6 +727,79 @@ public class VistaProductos extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_eventoComboCategoria
+
+    private void accionGenerarReportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionGenerarReportes
+        // TODO add your handling code here:
+        //logica para generar reporte pdf
+        try {
+            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF",FileDialog.SAVE);
+            dialogoArchivo.setFile("ReportesProductos.pdf");
+            dialogoArchivo.setVisible(true);
+            
+        String ruta = dialogoArchivo.getDirectory();
+        String nombreArchivo = dialogoArchivo.getFile();
+        
+        if (ruta == null ||nombreArchivo == null){
+            JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        String rutaCompleta = ruta + nombreArchivo;
+        
+        PdfWriter escritor = new PdfWriter(rutaCompleta);
+        PdfDocument pdf= new PdfDocument(escritor);
+        Document documento = new Document(pdf);
+        
+        documento.add(new Paragraph("Reportes de Productos")
+        .setTextAlignment(TextAlignment.CENTER)
+        .setFontSize(20)
+        .setBold());
+        
+        documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
+        .setTextAlignment(TextAlignment.CENTER)
+        .setFontSize(12));
+        
+        Table tabla = new Table(6);
+        tabla.setWidth(UnitValue.createPercentValue(100));
+        tabla.addHeaderCell("ID Producto").setBold();
+        tabla.addHeaderCell("nombre_producto").setBold();
+        tabla.addHeaderCell("precio_costo").setBold();
+        tabla.addHeaderCell("precio_venta").setBold();
+        tabla.addHeaderCell("existencia").setBold();
+        tabla.addHeaderCell("id_categoria").setBold();
+      
+        List<Producto> listaProductos =
+        productoControlador.obtenerTodosProductos();
+        if (listaProductos != null){
+            for (Producto producto: listaProductos){
+                tabla.addCell(String.valueOf(producto.getId_producto()));
+                tabla.addCell(String.valueOf(producto.getNombre_producto()));
+                tabla.addCell(String.valueOf(producto.getPrecio_costo()));
+                tabla.addCell(String.valueOf(producto.getPrecio_venta()));
+                tabla.addCell(String.valueOf(producto.getExistencia()));
+                tabla.addCell(String.valueOf(producto.getId_categoria()));
+            }
+        }
+        documento.add(tabla);
+        
+        documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
+        .setFontSize(10)
+        .setMarginTop(20));
+        
+        documento.close();
+        
+        JOptionPane.showMessageDialog(
+                    this,
+                "Reporte pdf generado con exito en:" + rutaCompleta,
+                "Exito", JOptionPane.INFORMATION_MESSAGE);
+        
+        }catch (Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al Generar el PDF:" + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE );
+        }
+    }//GEN-LAST:event_accionGenerarReportes
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
