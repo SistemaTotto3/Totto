@@ -500,65 +500,82 @@ public class VistaInsumo extends javax.swing.JPanel {
     private void tablainsumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablainsumoMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            int filaSeleccionada = tablainsumo.getSelectedRow();
-            if (filaSeleccionada != -1) {
-                idInsumoSeleccionado = (int) tablainsumo.getValueAt(filaSeleccionada, 0);
-                String nombre = (String) tablainsumo.getValueAt(filaSeleccionada, 1);
-                Float precio_insumo = (Float) tablainsumo.getValueAt(filaSeleccionada, 2);
+        int filaSeleccionada = tablainsumo.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            idInsumoSeleccionado = (int) tablainsumo.getValueAt(filaSeleccionada, 0);
+            Date fechaInsumo = (Date) tablainsumo.getValueAt(filaSeleccionada, 1);
+            Float totalInsumo = (Float) tablainsumo.getValueAt(filaSeleccionada, 2);
 
-                textNombreInsumo.setText(nombre);
-                textPrecioInsumo.setText(String.valueOf(precio_insumo));
+            selectorfechaInsumo.setDate(fechaInsumo);
 
-                btnEliminar.setEnabled(false);
-                btnGuardar.setEnabled(false);
+            // Cargar detalles del insumo seleccionado
+            DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
+            modelDetalles.setRowCount(0);
+            List<Detalle_Insumo> detalles = detalle_insumoControlador.obtenerTodosDetalleInsumo();
+            if (detalles != null) {
+                for (Detalle_Insumo detalle : detalles) {
+                    if (detalle.getId_insumo() == idInsumoSeleccionado) {
+                        Object[] fila = {
+                            detalle.getNombre_insumo(),
+                            detalle.getPrecio_insumo(),
+                            detalle.getCantidad_insumo(),
+                            detalle.getPrecio_insumo() * detalle.getCantidad_insumo()
+                        };
+                        modelDetalles.addRow(fila);
+                    }
+                }
             }
+
+            btnEliminar.setEnabled(true);
+            btnActualizar.setEnabled(true);
         }
+    }
     }//GEN-LAST:event_tablainsumoMouseClicked
 
     private void accionbtnGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnGuardar
         try {
-            // Obtener la fecha del selector
-            Date fecha_insumo = selectorfechaInsumo.getDate();
-            if (fecha_insumo == null) {
-                JOptionPane.showMessageDialog(this, "Seleccione una fecha para el insumo.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Obtener los detalles de la tabla
-            DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
-            int rowCount = modelDetalles.getRowCount();
-            if (rowCount == 0) {
-                JOptionPane.showMessageDialog(this, "Agregue al menos un insumo al detalle.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            List<Detalle_Insumo> detalles = new ArrayList<>();
-            float total_insumo = 0;
-
-            for (int i = 0; i < rowCount; i++) {
-                String nombreInsumo = modelDetalles.getValueAt(i, 0).toString();
-                float precio = ((Number) modelDetalles.getValueAt(i, 2)).floatValue();
-                float cantidad = ((Number) modelDetalles.getValueAt(i, 3)).floatValue();
-                float subtotal = ((Number) modelDetalles.getValueAt(i, 4)).floatValue();
-
-                Detalle_Insumo detalle = new Detalle_Insumo();
-                detalle.setNombre_insumo(nombreInsumo);
-                detalle.setPrecio_insumo(precio);
-                detalle.setCantidad_insumo(cantidad);
-
-                detalles.add(detalle);
-                total_insumo += subtotal;
-            }
-
-            // Llamar al controlador para guardar el insumo y sus detalles
-            insumoControlador.crearInsumo(fecha_insumo, total_insumo, detalles);
-
-            limpiar();
-            cargarDatosTabla(); // si tienes una tabla general de insumos
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar el insumo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        // Obtener la fecha del selector
+        Date fecha_insumo = selectorfechaInsumo.getDate();
+        if (fecha_insumo == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fecha para el insumo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        // Obtener los detalles de la tabla
+        DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
+        int rowCount = modelDetalles.getRowCount();
+        if (rowCount == 0) {
+            JOptionPane.showMessageDialog(this, "Agregue al menos un insumo al detalle.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        List<Detalle_Insumo> detalles = new ArrayList<>();
+        float total_insumo = 0;
+
+        for (int i = 0; i < rowCount; i++) {
+            String nombreInsumo = modelDetalles.getValueAt(i, 0).toString();
+            float precio = ((Number) modelDetalles.getValueAt(i, 1)).floatValue();
+            float cantidad = ((Number) modelDetalles.getValueAt(i, 2)).floatValue();
+            float subtotal = ((Number) modelDetalles.getValueAt(i, 3)).floatValue();
+
+            Detalle_Insumo detalle = new Detalle_Insumo();
+            detalle.setNombre_insumo(nombreInsumo);
+            detalle.setPrecio_insumo(precio);
+            detalle.setCantidad_insumo(cantidad);
+            detalles.add(detalle);
+            total_insumo += subtotal;
+        }
+
+        // Llamar al controlador para guardar el insumo y sus detalles
+        insumoControlador.crearInsumo(fecha_insumo, total_insumo, detalles);
+
+        limpiar();
+        cargarDatosTabla();
+
+    } catch (Exception e) {
+        e.printStackTrace(); // Imprimir stack trace para depuración
+        JOptionPane.showMessageDialog(this, "Error al guardar el insumo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     }//GEN-LAST:event_accionbtnGuardar
 

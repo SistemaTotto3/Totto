@@ -238,7 +238,7 @@ public class VistaClientes extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Reportes");
 
-        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/reporte (1).png"))); // NOI18N
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/reporte (1)_1.png"))); // NOI18N
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accionGenerarReportes(evt);
@@ -368,7 +368,7 @@ public class VistaClientes extends javax.swing.JPanel {
                                                 .addComponent(textBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel12)))))))
-                        .addGap(0, 184, Short.MAX_VALUE))
+                        .addGap(0, 188, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2)))

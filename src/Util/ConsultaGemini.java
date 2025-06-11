@@ -58,14 +58,16 @@ public class ConsultaGemini {
         return """
             Tabla: Insumo (
             id_insumo INT AUTO_INCREMENT PRIMARY KEY,
-            nombre_insumo VARCHAR(50),
-            precio_insumo FLOAT
+            fecha_insumo DATETIME,
+            total_insumo FLOAT
             )
             Tabla:  Detalle_Insumo (
             id_detalle_insumo INT AUTO_INCREMENT PRIMARY KEY,
             id_insumo INT,
             id_producto INT,
-            cantidad_insumo DECIMAL (10,2)
+            nombre_insumo VARCHAR(50),
+            cantidad_insumo float, 
+            precio_insumo Float
             )
             Tabla: Cliente (
             idCliente INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,15 +90,14 @@ public class ConsultaGemini {
             )
             Tabla: Orden (
             idOrden INT AUTO_INCREMENT PRIMARY KEY,
-            id_cuenta INT,
             fecha_orden DATETIME
             ) 
             Tabla: Detalle_Orden (
             id_detalle_orden INT AUTO_INCREMENT PRIMARY KEY,
             idOrden INT,
             id_producto INT,
-            fecha_orden DATETIME,
-            estado_orden VARCHAR(50)
+            estado_orden VARCHAR(50),
+            cantidad INT
             )
             Tabla: Cuenta (
             id_cuenta INT AUTO_INCREMENT PRIMARY KEY,
@@ -112,6 +113,7 @@ public class ConsultaGemini {
             - Detalle_orden.id_producto -> Producto.id_producto
             - Detalle_orden.idOrden -> Orden.idOrden
             - Cuenta.idCliente -> Cliente.idCliente
+            - Cuenta.idOrden -> Orden.idOrden 
             - Orden.id_cuenta -> Cuenta.id_cuenta
             - Producto.id_categoria -> Categoria.id_categoria
             """;    

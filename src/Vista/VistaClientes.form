@@ -83,7 +83,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="184" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="188" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -429,7 +429,7 @@
             <Component class="javax.swing.JButton" name="btnReportes">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imgs/reporte (1).png"/>
+                  <Image iconType="3" name="/imgs/reporte (1)_1.png"/>
                 </Property>
               </Properties>
               <Events>
