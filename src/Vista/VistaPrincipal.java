@@ -19,6 +19,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         opciones.addTab("Clientes", new VistaClientes());
         opciones.addTab("Insumo", new VistaInsumo());
         opciones.addTab("Orden", new VistaOrden());
+        opciones.addTab("Cuenta", new VistaCuenta());
         opciones.addTab("Consultas con IA", new VistaConsultasDinamicas());
         
         
@@ -48,7 +49,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(opciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+            .addComponent(opciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

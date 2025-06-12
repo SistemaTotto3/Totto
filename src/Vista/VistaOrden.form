@@ -71,13 +71,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="comboProductos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jlabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="comboEstado" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jlabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="textcantidad" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="comboProductos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboEstado" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jlabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>

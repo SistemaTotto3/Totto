@@ -4,7 +4,9 @@
  */
 package Modelo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
+
 
 /**
  *
@@ -15,20 +17,20 @@ public class Cuenta {
     private int id_cuenta;
     private int idOrden; //Relacion con orden
     private int idCliente; //Relacion con cliente
-    private LocalDateTime fecha_cuenta;
+    private Date fecha_cuenta;
     private float total_cuenta;
     private String estado_cuenta;
 
-    public Cuenta(int id_cuenta, int idOrden, int idCliente, LocalDateTime fecha_cuenta, float total_cuenta, String estado_cuenta) {
+    public Cuenta() {
+    }
+
+    public Cuenta(int id_cuenta, int idOrden, int idCliente, Date fecha_cuenta, float total_cuenta, String estado_cuenta) {
         this.id_cuenta = id_cuenta;
         this.idOrden = idOrden;
         this.idCliente = idCliente;
         this.fecha_cuenta = fecha_cuenta;
         this.total_cuenta = total_cuenta;
         this.estado_cuenta = estado_cuenta;
-    }
-
-    public Cuenta() {
     }
 
     public int getId_cuenta() {
@@ -55,11 +57,11 @@ public class Cuenta {
         this.idCliente = idCliente;
     }
 
-    public LocalDateTime getFecha_cuenta() {
+    public Date getFecha_cuenta() {
         return fecha_cuenta;
     }
 
-    public void setFecha_cuenta(LocalDateTime fecha_cuenta) {
+    public void setFecha_cuenta(Date fecha_cuenta) {
         this.fecha_cuenta = fecha_cuenta;
     }
 
@@ -79,4 +81,5 @@ public class Cuenta {
         this.estado_cuenta = estado_cuenta;
     }
 
+    
 }
