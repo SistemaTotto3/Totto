@@ -33,24 +33,23 @@ public class VistaCuenta extends javax.swing.JPanel {
     private Integer idOrdenSeleccionada = null;
     private Timer timer;
     private boolean horabd = false;
-    
+
     /**
      * Creates new form VistaCuenta
      */
     public VistaCuenta() {
         initComponents();
         this.cuentaControlador = new CuentaControlador();
-        
+
         // Inicialización general
         selectorfecha_cuenta.setDate(new Date());
         ((JTextField) selectorfecha_cuenta.getDateEditor().getUiComponent()).setEditable(false);
-        
+
         cargarDatosTabla();
         actualizarHora();
     }
 
-
-      private void limpiar() {
+    private void limpiar() {
         textidOrden.setText("");
         textidCliente.setText("");
         selectorfecha_cuenta.setDate(new Date());
@@ -62,8 +61,7 @@ public class VistaCuenta extends javax.swing.JPanel {
         actualizarHora();
     }
 
-      
-       private void actualizarHora() {
+    private void actualizarHora() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("America/Managua"));
 
@@ -81,8 +79,8 @@ public class VistaCuenta extends javax.swing.JPanel {
         });
         timer.start();
     }
-      
-      public void cargarDatosTabla() {
+
+    public void cargarDatosTabla() {
         List<Cuenta> cuentas = cuentaControlador.obtenerTodasCuentas();
         if (cuentas != null) {
             DefaultTableModel model = (DefaultTableModel) tablacuenta.getModel();
@@ -100,10 +98,7 @@ public class VistaCuenta extends javax.swing.JPanel {
             }
         }
     }
- 
-      
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -470,8 +465,7 @@ public class VistaCuenta extends javax.swing.JPanel {
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
 
-        
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -541,13 +535,13 @@ public class VistaCuenta extends javax.swing.JPanel {
             Document documento = new Document(pdf);
 
             documento.add(new Paragraph("Reportes de Cuentas")
-                .setTextAlignment(TextAlignment.CENTER)
-                .setFontSize(20)
-                .setBold());
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(20)
+                    .setBold());
 
             documento.add(new Paragraph("Fecha: " + new Date().toString())
-                .setTextAlignment(TextAlignment.CENTER)
-                .setFontSize(12));
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(12));
 
             Table tabla = new Table(5);
             tabla.setWidth(UnitValue.createPercentValue(100));
@@ -572,84 +566,84 @@ public class VistaCuenta extends javax.swing.JPanel {
             documento.add(tabla);
 
             documento.add(new Paragraph("Notas: Reporte generado automáticamente desde el sistema.")
-                .setFontSize(10)
-                .setMarginTop(20));
+                    .setFontSize(10)
+                    .setMarginTop(20));
 
             documento.close();
 
             JOptionPane.showMessageDialog(
-                this,
-                "Reporte PDF generado con éxito en: " + rutaCompleta,
-                "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    this,
+                    "Reporte PDF generado con éxito en: " + rutaCompleta,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(
-                this,
-                "Error al generar el PDF: " + e.getMessage(),
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    this,
+                    "Error al generar el PDF: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void textBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBuscarKeyTyped
         // TODO add your handling code here:
         String textoBusqueda = textBuscarCuenta.getText().trim().toLowerCase();
-List<Cuenta> cuentas = cuentaControlador.obtenerTodasCuentas();
+        List<Cuenta> cuentas = cuentaControlador.obtenerTodasCuentas();
 
-DefaultTableModel modelo = (DefaultTableModel) tablacuenta.getModel();
-modelo.setRowCount(0);
+        DefaultTableModel modelo = (DefaultTableModel) tablacuenta.getModel();
+        modelo.setRowCount(0);
 
-if (cuentas != null) {
-    for (Cuenta cuenta : cuentas) {
-        if (textoBusqueda.isEmpty() ||
-            String.valueOf(cuenta.getIdOrden()).contains(textoBusqueda) ||
-            String.valueOf(cuenta.getIdCliente()).contains(textoBusqueda) ||
-            String.valueOf(cuenta.getTotal_cuenta()).contains(textoBusqueda) ||
-            (cuenta.getEstado_cuenta() != null && cuenta.getEstado_cuenta().toLowerCase().contains(textoBusqueda))) {
+        if (cuentas != null) {
+            for (Cuenta cuenta : cuentas) {
+                if (textoBusqueda.isEmpty()
+                        || String.valueOf(cuenta.getIdOrden()).contains(textoBusqueda)
+                        || String.valueOf(cuenta.getIdCliente()).contains(textoBusqueda)
+                        || String.valueOf(cuenta.getTotal_cuenta()).contains(textoBusqueda)
+                        || (cuenta.getEstado_cuenta() != null && cuenta.getEstado_cuenta().toLowerCase().contains(textoBusqueda))) {
 
-            Object[] fila = {
-                cuenta.getId_cuenta(),        // Asegúrate de que esta columna exista en tu tabla
-                cuenta.getIdOrden(),
-                cuenta.getIdCliente(),
-                cuenta.getFecha_cuenta(),
-                cuenta.getTotal_cuenta(),
-                cuenta.getEstado_cuenta()
-            };
-            modelo.addRow(fila);
+                    Object[] fila = {
+                        cuenta.getId_cuenta(), // Asegúrate de que esta columna exista en tu tabla
+                        cuenta.getIdOrden(),
+                        cuenta.getIdCliente(),
+                        cuenta.getFecha_cuenta(),
+                        cuenta.getTotal_cuenta(),
+                        cuenta.getEstado_cuenta()
+                    };
+                    modelo.addRow(fila);
+                }
+            }
         }
-    }
-}
 
     }//GEN-LAST:event_textBuscarKeyTyped
 
     private void tablaCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCuentaMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-    int filaSeleccionada = tablacuenta.getSelectedRow();
-    if (filaSeleccionada != -1) {
-        idOrdenSeleccionada = (int) tablacuenta.getValueAt(filaSeleccionada, 0);
-        String idOrden = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 1));
-        String idCliente = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 2));
-        String fecha_cuenta = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 3));
-        String total_cuenta = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 4));
-        String estado_cuenta = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 5));
+            int filaSeleccionada = tablacuenta.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                idOrdenSeleccionada = (int) tablacuenta.getValueAt(filaSeleccionada, 0);
+                String idOrden = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 1));
+                String idCliente = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 2));
+                String fecha_cuenta = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 3));
+                String total_cuenta = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 4));
+                String estado_cuenta = String.valueOf(tablacuenta.getValueAt(filaSeleccionada, 5));
 
-        textidOrden.setText(idOrden);
-        textidCliente.setText(idCliente);
-        texttotal_cuenta.setText(total_cuenta);
-        comboestado_cuenta.setSelectedItem(estado_cuenta != null ? estado_cuenta : "Seleccionar");
+                textidOrden.setText(idOrden);
+                textidCliente.setText(idCliente);
+                texttotal_cuenta.setText(total_cuenta);
+                comboestado_cuenta.setSelectedItem(estado_cuenta != null ? estado_cuenta : "Seleccionar");
 
-        try {
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); // Ajusta según el formato real
-            Date fecha = formato.parse(fecha_cuenta);
-            selectorfecha_cuenta.setDate(fecha);
-        } catch (Exception e) {
-            e.printStackTrace();
+                try {
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); // Ajusta según el formato real
+                    Date fecha = formato.parse(fecha_cuenta);
+                    selectorfecha_cuenta.setDate(fecha);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                btnEliminar.setEnabled(false);
+                btnGuardar.setEnabled(false);
+            }
         }
-
-        btnEliminar.setEnabled(false);
-        btnGuardar.setEnabled(false);
-    }
-}
 
     }//GEN-LAST:event_tablaCuentaMouseClicked
 
