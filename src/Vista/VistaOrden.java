@@ -152,51 +152,100 @@ public class VistaOrden extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        textBuscar = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        btnQuitarDetalle = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaOrdenes = new javax.swing.JTable();
-        hora = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        btnLimpiar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
         comboProductos = new javax.swing.JComboBox<>();
-        btnGuardar = new javax.swing.JButton();
-        selectorfecha_orden = new com.toedter.calendar.JDateChooser();
-        textcantidad = new javax.swing.JTextField();
+        jlabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDetalles = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         comboEstado = new javax.swing.JComboBox<>();
+        jlabel4 = new javax.swing.JLabel();
+        jlabel5 = new javax.swing.JLabel();
+        textcantidad = new javax.swing.JTextField();
+        selectorfecha_orden = new com.toedter.calendar.JDateChooser();
+        hora = new javax.swing.JLabel();
+        jlabel6 = new javax.swing.JLabel();
+        textBuscar = new javax.swing.JTextField();
+        jlabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaOrdenes = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnAgregar = new javax.swing.JButton();
+        btnQuitarDetalle = new javax.swing.JButton();
+        jlabel7 = new javax.swing.JLabel();
+        jlabel8 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jlabel10 = new javax.swing.JLabel();
+        jlabel11 = new javax.swing.JLabel();
+        jlabel12 = new javax.swing.JLabel();
+        jlabel13 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 51, 102));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 51));
+        comboProductos.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        comboProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Producto 1", "Producto 2", "Producto 3", "Producto 4" }));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logo pequeño.png"))); // NOI18N
+        jlabel3.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel3.setText("Producto");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID Producto", "Producto", "Estado Orden", "Cantidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaDetalles);
+
+        comboEstado.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+
+        jlabel4.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel4.setText("Estado");
+
+        jlabel5.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel5.setText("Cantidad");
+
+        textcantidad.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        textcantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        textcantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textcantidadActionPerformed(evt);
+            }
+        });
+
+        hora.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        hora.setForeground(new java.awt.Color(255, 255, 255));
+        hora.setText("00:00:00");
+
+        jlabel6.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel6.setText("Fecha");
 
         textBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,20 +258,11 @@ public class VistaOrden extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Buscar");
+        jlabel9.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel9.setText("Buscar");
 
-        btnQuitarDetalle.setText("QuitarDetalles");
-        btnQuitarDetalle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnQuitarDetalles(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText(" fecha");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/buscar (2).png"))); // NOI18N
 
         tablaOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +272,7 @@ public class VistaOrden extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "IdOrden", "Fecha/Hora"
+                "ID Orden", "Fecha/Hora"
             }
         ) {
             Class[] types = new Class [] {
@@ -257,192 +297,231 @@ public class VistaOrden extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaOrdenes);
 
-        hora.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        hora.setForeground(new java.awt.Color(255, 255, 255));
-        hora.setText("00:00:00");
+        jPanel1.setBackground(new java.awt.Color(0, 0, 51));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Producto");
-
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnLimpiar(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Estado Orden");
-
-        btnEliminar.setText("EliminarOrden");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnEliminar(evt);
-            }
-        });
-
-        btnAgregar.setText("Agregar");
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/boton-agregar (1).png"))); // NOI18N
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accionbtnAgregar(evt);
             }
         });
 
-        btnActualizar.setText("ActualizarOrden");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnQuitarDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/signo-menos.png"))); // NOI18N
+        btnQuitarDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accionbtnActualizar(evt);
+                accionbtnQuitarDetalles(evt);
             }
         });
 
-        comboProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Producto 1", "Producto 2", "Producto 3", "Producto 4" }));
+        jlabel7.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel7.setText("Agregar");
 
-        btnGuardar.setText("GuardaOrden");
+        jlabel8.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel8.setText("Quitar Detalles");
+
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/salvar.png"))); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardaraccionBotonGuardar(evt);
             }
         });
 
-        tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "id_Producto", "Producto", "Estado_Orden", "Cantidad"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/actualizar (1).png"))); // NOI18N
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnActualizar(evt);
             }
         });
-        jScrollPane2.setViewportView(tablaDetalles);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cantidad");
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/borrar.png"))); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnEliminar(evt);
+            }
+        });
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/escoba (1).png"))); // NOI18N
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnLimpiar(evt);
+            }
+        });
+
+        jlabel10.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel10.setText("Guardar orden");
+
+        jlabel11.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel11.setText("Actualizar orden");
+
+        jlabel12.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel12.setText("Eliminar orden");
+
+        jlabel13.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
+        jlabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jlabel13.setText("Limpiar");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logo pequeño.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnQuitarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlabel7)
+                    .addComponent(jlabel8)
+                    .addComponent(jlabel11)
+                    .addComponent(jlabel12)
+                    .addComponent(jlabel13)
+                    .addComponent(jlabel10))
+                .addGap(14, 14, 14))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jlabel7)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnQuitarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jlabel8)))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jlabel10)
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jlabel11)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jlabel12)))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jlabel13)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuitarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(71, 71, 71)
-                                    .addComponent(jLabel5)
-                                    .addGap(48, 48, 48)
-                                    .addComponent(hora))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(41, 41, 41)
-                                    .addComponent(selectorfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addComponent(jLabel2))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(comboProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(52, 52, 52)
-                                    .addComponent(textcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(24, 24, 24))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(31, 31, 31)
-                                    .addComponent(jLabel6)
-                                    .addGap(93, 93, 93)
-                                    .addComponent(jLabel1)
-                                    .addGap(211, 211, 211))))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(101, 101, 101)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jlabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(selectorfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(hora)
+                                .addGap(149, 149, 149)
+                                .addComponent(jlabel9))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlabel3)
+                    .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlabel4)
+                    .addComponent(jlabel5)
+                    .addComponent(textcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboProductos)
-                            .addComponent(textcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboEstado)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hora)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(10, 10, 10)
-                        .addComponent(selectorfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQuitarDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                            .addComponent(jlabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selectorfecha_orden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlabel6)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void textcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textcantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textcantidadActionPerformed
 
     private void textBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBuscarActionPerformed
         // TODO add your handling code here:
@@ -468,21 +547,6 @@ public class VistaOrden extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_textBuscarKeyTyped
-
-    private void accionbtnQuitarDetalles(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnQuitarDetalles
-        try {
-            int filaSeleccionada = tablaDetalles.getSelectedRow();
-            if (filaSeleccionada == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione un detalle para quitar.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            DefaultTableModel model = (DefaultTableModel) tablaDetalles.getModel();
-            model.removeRow(filaSeleccionada);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al quitar el detalle: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_accionbtnQuitarDetalles
 
     private void tablaOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOrdenesMouseClicked
 
@@ -576,42 +640,6 @@ public class VistaOrden extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tablaOrdenesMouseClicked
 
-    private void accionbtnLimpiar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnLimpiar
-        // TODO add your handling code here:
-        limpiar();
-    }//GEN-LAST:event_accionbtnLimpiar
-
-    private void accionbtnEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnEliminar
-        try {
-            int fila = tablaOrdenes.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una orden para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            DefaultTableModel model = (DefaultTableModel) tablaOrdenes.getModel();
-            int idOrden = (int) model.getValueAt(fila, 0);
-
-            int confirm = JOptionPane.showConfirmDialog(this,
-                "¿Desea eliminar la orden con ID " + idOrden + "?", "Confirmar eliminación",
-                JOptionPane.YES_NO_OPTION);
-
-            if (confirm == JOptionPane.YES_OPTION) {
-                List<Detalle_Orden> detalles = detalleOrdenControlador.obtenerTodosDetalleOrden();
-                for (Detalle_Orden d : detalles) {
-                    if (d.getIdOrden() == idOrden) {
-                        detalleOrdenControlador.eliminarDetalleOrden(d.getId_detalle_orden());
-                    }
-                }
-                ordenControlador.eliminarOrden(idOrden);
-                limpiar();
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al eliminar la orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_accionbtnEliminar
-
     private void accionbtnAgregar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnAgregar
         try {
             int indiceSeleccionado = comboProductos.getSelectedIndex();
@@ -660,74 +688,20 @@ public class VistaOrden extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_accionbtnAgregar
 
-    private void accionbtnActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnActualizar
+    private void accionbtnQuitarDetalles(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnQuitarDetalles
         try {
-            int filaSeleccionada = tablaOrdenes.getSelectedRow();
+            int filaSeleccionada = tablaDetalles.getSelectedRow();
             if (filaSeleccionada == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una orden.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Seleccione un detalle para quitar.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
-            }
-            // Obtener el idOrden de la fila seleccionada
-            DefaultTableModel modelOrdenes = (DefaultTableModel) tablaOrdenes.getModel();
-            int idOrden = (int) modelOrdenes.getValueAt(filaSeleccionada, 0);
-            
-             // Obtener la fecha seleccionada
-            Date fecha_orden = selectorfecha_orden.getDate();
-            if (fecha_orden == null) {
-                JOptionPane.showMessageDialog(this, "Seleccione una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            // Obtener los detalles de la tabla tablaDetalles
-            DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
-            int rowCount = modelDetalles.getRowCount();
-            if (rowCount == 0) {
-                JOptionPane.showMessageDialog(this, "Agregue al menos un producto a la venta.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-             // Actualizar la orden principal
-            ordenControlador.actualizarOrden(idOrden, fecha_orden);
-            
-             // Eliminar los detalles antiguos de la orden
-            List<Detalle_Orden> detallesAntiguos = detalleOrdenControlador.obtenerTodosDetalleOrden();
-            if (detallesAntiguos != null) {
-                for (Detalle_Orden detalle : detallesAntiguos) {
-                    if (detalle.getIdOrden()== idOrden) {
-                        detalleOrdenControlador.eliminarDetalleOrden(detalle.getId_detalle_orden());
-                    }
-                }
             }
 
-             List<Detalle_Orden> nuevosDetalles = new ArrayList<>();
-            for (int i = 0; i < modelDetalles.getRowCount(); i++) {
-                int idProd = (int) modelDetalles.getValueAt(i, 0);
-                String estado = (String) modelDetalles.getValueAt(i, 2);
-                int cantidad = (int) modelDetalles.getValueAt(i, 3);
-                
-              // Crear y guardar el nuevo detalle
-                Detalle_Orden detalle = new Detalle_Orden();
-                detalle.setIdOrden(idOrden);
-                detalle.setId_producto(idProd);
-                detalle.setEstado_orden(estado);
-                detalle.setCantidad(cantidad);
-                nuevosDetalles.add(detalle);
-                detalleOrdenControlador.crearDetalleOrden(idOrden, idProd, estado, cantidad);
-            }
-            // Limpiar la tabla de detalles y el formulario
-            tablaDetalles.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"ID Producto", "Producto", "estado_orden", "Cantidad"}));
-            limpiar();
-            
-            // Recargar la tabla de ordenes
-            cargarDatosTablaOrdenes();
-
-            // Habilitar botones nuevamente
-            btnEliminar.setEnabled(true);
-            btnGuardar.setEnabled(true);
-            
+            DefaultTableModel model = (DefaultTableModel) tablaDetalles.getModel();
+            model.removeRow(filaSeleccionada);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al quitar el detalle: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-   
-    }//GEN-LAST:event_accionbtnActualizar
+    }//GEN-LAST:event_accionbtnQuitarDetalles
 
     private void btnGuardaraccionBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaraccionBotonGuardar
         try {
@@ -768,6 +742,111 @@ public class VistaOrden extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnGuardaraccionBotonGuardar
 
+    private void accionbtnActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnActualizar
+        try {
+            int filaSeleccionada = tablaOrdenes.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una orden.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // Obtener el idOrden de la fila seleccionada
+            DefaultTableModel modelOrdenes = (DefaultTableModel) tablaOrdenes.getModel();
+            int idOrden = (int) modelOrdenes.getValueAt(filaSeleccionada, 0);
+
+            // Obtener la fecha seleccionada
+            Date fecha_orden = selectorfecha_orden.getDate();
+            if (fecha_orden == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // Obtener los detalles de la tabla tablaDetalles
+            DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
+            int rowCount = modelDetalles.getRowCount();
+            if (rowCount == 0) {
+                JOptionPane.showMessageDialog(this, "Agregue al menos un producto a la venta.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // Actualizar la orden principal
+            ordenControlador.actualizarOrden(idOrden, fecha_orden);
+
+            // Eliminar los detalles antiguos de la orden
+            List<Detalle_Orden> detallesAntiguos = detalleOrdenControlador.obtenerTodosDetalleOrden();
+            if (detallesAntiguos != null) {
+                for (Detalle_Orden detalle : detallesAntiguos) {
+                    if (detalle.getIdOrden()== idOrden) {
+                        detalleOrdenControlador.eliminarDetalleOrden(detalle.getId_detalle_orden());
+                    }
+                }
+            }
+
+            List<Detalle_Orden> nuevosDetalles = new ArrayList<>();
+            for (int i = 0; i < modelDetalles.getRowCount(); i++) {
+                int idProd = (int) modelDetalles.getValueAt(i, 0);
+                String estado = (String) modelDetalles.getValueAt(i, 2);
+                int cantidad = (int) modelDetalles.getValueAt(i, 3);
+
+                // Crear y guardar el nuevo detalle
+                Detalle_Orden detalle = new Detalle_Orden();
+                detalle.setIdOrden(idOrden);
+                detalle.setId_producto(idProd);
+                detalle.setEstado_orden(estado);
+                detalle.setCantidad(cantidad);
+                nuevosDetalles.add(detalle);
+                detalleOrdenControlador.crearDetalleOrden(idOrden, idProd, estado, cantidad);
+            }
+            // Limpiar la tabla de detalles y el formulario
+            tablaDetalles.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"ID Producto", "Producto", "estado_orden", "Cantidad"}));
+            limpiar();
+
+            // Recargar la tabla de ordenes
+            cargarDatosTablaOrdenes();
+
+            // Habilitar botones nuevamente
+            btnEliminar.setEnabled(true);
+            btnGuardar.setEnabled(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_accionbtnActualizar
+
+    private void accionbtnEliminar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnEliminar
+        try {
+            int fila = tablaOrdenes.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una orden para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            DefaultTableModel model = (DefaultTableModel) tablaOrdenes.getModel();
+            int idOrden = (int) model.getValueAt(fila, 0);
+
+            int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Desea eliminar la orden con ID " + idOrden + "?", "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                List<Detalle_Orden> detalles = detalleOrdenControlador.obtenerTodosDetalleOrden();
+                for (Detalle_Orden d : detalles) {
+                    if (d.getIdOrden() == idOrden) {
+                        detalleOrdenControlador.eliminarDetalleOrden(d.getId_detalle_orden());
+                    }
+                }
+                ordenControlador.eliminarOrden(idOrden);
+                limpiar();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la orden: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_accionbtnEliminar
+
+    private void accionbtnLimpiar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnLimpiar
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_accionbtnLimpiar
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -779,15 +858,22 @@ public class VistaOrden extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboEstado;
     private javax.swing.JComboBox<String> comboProductos;
     private javax.swing.JLabel hora;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jlabel10;
+    private javax.swing.JLabel jlabel11;
+    private javax.swing.JLabel jlabel12;
+    private javax.swing.JLabel jlabel13;
+    private javax.swing.JLabel jlabel3;
+    private javax.swing.JLabel jlabel4;
+    private javax.swing.JLabel jlabel5;
+    private javax.swing.JLabel jlabel6;
+    private javax.swing.JLabel jlabel7;
+    private javax.swing.JLabel jlabel8;
+    private javax.swing.JLabel jlabel9;
     private com.toedter.calendar.JDateChooser selectorfecha_orden;
     private javax.swing.JTable tablaDetalles;
     private javax.swing.JTable tablaOrdenes;
